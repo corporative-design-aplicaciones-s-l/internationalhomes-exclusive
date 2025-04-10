@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\PropertyController;
 use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', fn() => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,6 +30,10 @@ Route::middleware('auth')->group(function () {
 
 // SEARCH
 Route::get('/buscar', [SearchController::class, 'index'])->name('search');
+
+// PROPERTIES
+Route::get('/propiedad/{slug}', [PropertyController::class, 'show'])->name('property.show');
+
 
 
 require __DIR__.'/auth.php';
