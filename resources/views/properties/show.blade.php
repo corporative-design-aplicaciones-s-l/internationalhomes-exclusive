@@ -2,6 +2,10 @@
 
 @section('title', $property->title)
 
+@section('style')
+    <link href="{{ asset('css/properties.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <div class="container py-5">
         <div class="row">

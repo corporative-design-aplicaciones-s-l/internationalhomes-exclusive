@@ -2,6 +2,10 @@
 
 @section('title', 'Propiedades en venta')
 
+@section('style')
+<link href="{{ asset('css/properties.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     {{-- Buscador --}}
     {{-- Estilos de fondo como Kaza --}}

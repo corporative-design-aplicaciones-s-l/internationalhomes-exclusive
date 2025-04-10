@@ -1,0 +1,109 @@
+/* Estilos específicos para la página "Nosotros" */
+
+
+/* Fondo de la sección hero */
+
+.hero-image {
+    background: url('/images/about-hero.jpg') no-repeat center center;
+    background-size: cover;
+    height: 60vh;
+}
+
+.hero-image h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+
+/* Estilo de la sección del equipo */
+
+.team-member {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.team-member img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.team-member h5 {
+    font-weight: 600;
+    color: #333;
+}
+
+.team-member p {
+    color: #888;
+}
+
+
+/* Testimonios */
+
+.testimonial {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial p {
+    font-style: italic;
+    color: #555;
+}
+
+.testimonial h5 {
+    font-weight: 600;
+    color: #333;
+}
+
+.testimonial .text-muted {
+    color: #888;
+}
+
+
+/* Estilo del formulario */
+
+form {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+form .form-control {
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+form .form-control:focus {
+    border-color: #d4a52d;
+    box-shadow: 0 0 5px rgba(212, 165, 45, 0.5);
+}
+
+form .form-label {
+    font-weight: 600;
+    color: #333;
+}
+
+form button {
+    background-color: #1d1d1f;
+    color: white;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+form button:hover {
+    background-color: #000;
+}
+
+form textarea {
+    resize: none;
+}

@@ -6,7 +6,7 @@
     <title>@yield('title', 'Domatia')</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
+    @yield('style','')
 
     <style>
         body {
@@ -20,8 +20,6 @@
         a {
             text-decoration: none;
         }
-
-        @yield('style','')
     </style>
 </head>
 <body>

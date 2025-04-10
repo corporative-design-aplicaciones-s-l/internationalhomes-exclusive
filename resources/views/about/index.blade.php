@@ -2,6 +2,10 @@
 
 @section('title', 'Conócenos')
 
+@section('style')
+    <link href="{{ asset(path: 'css/about.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
     <section class="hero-image"
         style="background: url('/images/our-company.jpg') no-repeat center center; background-size: cover; height: 60vh;">

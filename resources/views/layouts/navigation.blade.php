@@ -24,7 +24,7 @@
                     <a class="nav-link" href="{{ route('environment') }}">Entorno</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contacto</a>
+                    <a class="nav-link" href="{{ route('contact') }}">Contacto</a>
                 </li>
 
                 @auth

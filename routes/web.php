@@ -45,6 +45,7 @@ Route::get('/entorno', [EnvironmentController::class, 'index'])->name('environme
 Route::get('/entorno/{slug}', fn($slug) => view('environment.show', ['slug' => $slug]))->name('location.show');
 
 // CONTACT
+Route::get('/contact', fn() => view('contact.index'))->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
