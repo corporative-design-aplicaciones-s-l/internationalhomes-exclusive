@@ -191,7 +191,7 @@
                         <div class="row g-0">
                             {{-- Imagen --}}
                             <div class="col-md-4">
-                                <a href="{{ route('property.show', $property->slug) }}">
+                                <a href="{{ route('guest.property.show', $property->slug) }}">
                                     <img src="{{ $property->image }}" alt="{{ $property->title }}" class="w-100 h-100"
                                         style="object-fit: cover; aspect-ratio: 4/3;">
                                 </a>
@@ -206,7 +206,7 @@
                                         {{-- - Ref: {{ $property->id }} --}}
                                     </p>
                                     <h5 class="mb-2">
-                                        <a href="{{ route('property.show', $property->slug) }}"
+                                        <a href="{{ route('guest.property.show', $property->slug) }}"
                                             class="text-decoration-none text-dark">
                                             {{ $property->title }}
                                         </a>

@@ -5,6 +5,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PropertyController;
+use App\Http\Controllers\PropertyController as AdminPropertyController;
 use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
@@ -38,8 +39,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 
 // PROPERTIES
-Route::get('/propiedad/{slug}', [PropertyController::class, 'show'])->name('property.show');
-Route::get('/propiedades', [PropertyController::class, 'index'])->name('properties.index');
+Route::get('/propiedad/{slug}', [PropertyController::class, 'show'])->name('guest.property.show');
+Route::get('/propiedades', [PropertyController::class, 'index'])->name('guest.properties.index');
 
 // ABOUT
 Route::get('/nosotros', fn() => view('about.index'))->name('about');
@@ -58,7 +59,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     // Propiedades
-    Route::resource('admin/properties', PropertyController::class);
+    Route::resource('admin/properties', AdminPropertyController::class);
 
     // Gestión de usuarios
     Route::resource('admin/users', UserController::class);

@@ -47,7 +47,7 @@
                 <div class="swiper-wrapper">
                     @foreach ($featured as $property)
                         <div class="swiper-slide">
-                            <a href="{{ route('property.show', $property->slug) }}" class="d-block position-relative"
+                            <a href="{{ route('guest.property.show', $property->slug) }}" class="d-block position-relative"
                                 style="aspect-ratio: 1/1; overflow: hidden;">
                                 <img src="{{ $property->image }}" class="w-100 h-100" style="object-fit: cover;"
                                     alt="{{ $property->title }}">
