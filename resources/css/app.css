@@ -1,1 +1,4 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+.object-fit-cover {
+    object-fit: cover;
+}

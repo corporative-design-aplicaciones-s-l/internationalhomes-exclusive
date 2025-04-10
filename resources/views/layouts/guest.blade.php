@@ -31,5 +31,7 @@
     <footer class="text-center text-muted border-top py-4 mt-5">
         © {{ date('Y') }} Domatia. Todos los derechos reservados.
     </footer>
+
+    @stack('scripts')
 </body>
 </html>

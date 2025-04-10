@@ -4,7 +4,8 @@
 
 @section('content')
     {{-- Hero principal --}}
-    <section class="position-relative bg-dark text-white" style="height: 80vh; background: url('/images/hero.jpg') center center / cover no-repeat;">
+    <section class="position-relative bg-dark text-white"
+        style="height: 80vh; background: url('/images/hero.jpg') center center / cover no-repeat;">
         <div class="container h-100 d-flex align-items-center justify-content-center">
             <div class="text-center">
                 <h1 class="display-4 fw-light">Descubre propiedades exclusivas</h1>
@@ -38,22 +39,68 @@
     </section>
 
     {{-- Sección futura: propiedades destacadas --}}
-    <section class="container py-5">
+    <section class="pt-5">
         <h2 class="mb-4 text-center">Propiedades destacadas</h2>
-        {{-- Aquí irán las tarjetas de propiedades --}}
-        <div class="row">
-            {{-- Ejemplo de tarjeta --}}
-            <div class="col-md-4 mb-4">
-                <div class="card border-0 shadow-sm">
-                    <img src="/images/example.jpg" class="card-img-top" alt="Propiedad">
-                    <div class="card-body">
-                        <h5 class="card-title">Villa en Marbella</h5>
-                        <p class="card-text">€2.500.000 · 4 hab · 3 baños</p>
-                        <a href="#" class="btn btn-outline-dark btn-sm">Ver más</a>
-                    </div>
+
+        <div class="container">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    @foreach ($featured as $property)
+                        <div class="swiper-slide">
+                            <a href="#" class="d-block position-relative"
+                                style="aspect-ratio: 1/1; overflow: hidden;">
+                                <img src="{{ $property->image }}" class="w-100 h-100" style="object-fit: cover;"
+                                    alt="{{ $property->title }}">
+                                <div class="position-absolute bottom-0 start-0 end-0 p-2 text-white"
+                                    style="background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);">
+                                    <div class="fw-semibold small">{{ $property->title }}</div>
+                                    <div class="small">{{ number_format($property->price, 0, ',', '.') }} €</div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
+
+                {{-- Controles --}}
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                {{-- <div class="swiper-pagination"></div> --}}
             </div>
-            {{-- Fin ejemplo --}}
         </div>
     </section>
+
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                new Swiper(".mySwiper", {
+                    slidesPerView: 4,
+                    spaceBetween: 24,
+                    // pagination: {
+                    //     el: ".swiper-pagination",
+                    //     clickable: true,
+                    // },
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                    breakpoints: {
+                        0: {
+                            slidesPerView: 1.2,
+                        },
+                        576: {
+                            slidesPerView: 2,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                        },
+                        992: {
+                            slidesPerView: 4,
+                        },
+                    },
+                });
+            });
+        </script>
+    @endpush
+
 @endsection
