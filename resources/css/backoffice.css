@@ -1,0 +1,37 @@
+/* Sidebar */
+
+.sidebar {
+    padding-top: 20px;
+    background-color: #1d1d1f;
+}
+
+.sidebar h3 {
+    font-weight: 600;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.sidebar .nav-link {
+    color: white;
+    font-size: 16px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #333;
+}
+
+
+/* Botones del panel */
+
+.btn-main {
+    background-color: #d4a52d;
+    color: white;
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 8px 20px;
+    width: 100%;
+}
+
+.btn-main:hover {
+    background-color: #000;
+}

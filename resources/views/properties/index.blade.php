@@ -8,7 +8,6 @@
 
 @section('content')
     {{-- Buscador --}}
-    {{-- Estilos de fondo como Kaza --}}
     <div class="bg-light py-4 border-bottom">
         <form method="GET" action="{{ route('properties.index') }}" class="container">
             <div class="row g-2 align-items-center justify-content-center">
@@ -87,7 +86,6 @@
                 </div>
         </form>
 
-        {{-- Modal más filtros --}}
         <!-- Modal Más Filtros -->
         <div class="modal fade" id="filtersModal" tabindex="-1" aria-labelledby="filtersModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">

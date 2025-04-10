@@ -3,74 +3,7 @@
 @section('title', 'Contáctanos')
 
 @section('style')
-.hero-image {
-    position: relative;
-    background-color: #f2f2f2;
-}
-
-.hero-image h1 {
-    font-size: 3rem;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
-}
-
-section {
-    padding: 60px 0;
-}
-
-section h2 {
-    font-weight: 600;
-    color: #333;
-}
-
-section p {
-    color: #555;
-}
-
-form .form-control {
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 16px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-}
-
-form .form-control:focus {
-    border-color: #d4a52d;
-    box-shadow: 0 0 5px rgba(212, 165, 45, 0.5);
-}
-
-form .form-label {
-    font-weight: 600;
-    color: #333;
-}
-
-form button {
-    background-color: #1d1d1f;
-    color: white;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 50px;
-}
-
-form button:hover {
-    background-color: #000;
-}
-
-form textarea {
-    resize: none;
-}
-
-/* Estilo para los iconos */
-.bi {
-    color: #d4a52d;
-    font-size: 1.5rem;
-}
-
-/* Estilo para los checkboxes */
-.form-check-label {
-    color: #333;
-    font-size: 14px;
-}
+<link href="{{ asset(path: 'css/contact.css') }}" rel="stylesheet">
 
 @endsection
 

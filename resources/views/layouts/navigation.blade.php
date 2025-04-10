@@ -27,21 +27,7 @@
                     <a class="nav-link" href="{{ route('contact') }}">Contacto</a>
                 </li>
 
-                @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('dashboard') }}">Panel</a>
-                    </li>
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="btn btn-link nav-link" type="submit">Salir</button>
-                        </form>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Iniciar sesión</a>
-                    </li>
-                @endauth
+
             </ul>
         </div>
     </div>
