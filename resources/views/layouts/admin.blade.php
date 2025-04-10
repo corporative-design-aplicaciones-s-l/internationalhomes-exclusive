@@ -98,6 +98,10 @@
         .btn-main:hover {
             background-color: #000;
         }
+
+        .btn-link:hover {
+            color: #d4a52d;
+        }
     </style>
 </head>
 
@@ -107,16 +111,79 @@
         <div class="sidebar">
             <h3 class="text-center">
                 <img src="{{ asset('images/domatia_logo.png') }}" alt="Domatia Logo" class="img-fluid mx-auto d-block"
-                    style="max-width: 170px;">
+                    style="max-width: 200px;">
             </h3>
             <ul class="nav flex-column">
-                <li class="nav-item"><a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a></li>
-                <li class="nav-item"><a href="{{ route('properties.index') }}" class="nav-link">Propiedades</a></li>
-                <li class="nav-item"><a href="{{ route('users.index') }}" class="nav-link">Usuarios</a></li>
-                <li class="nav-item"><a href="{{ route('admin.reports') }}" class="nav-link">Informes</a></li>
-                <li class="nav-item"><a href="{{ route('admin.settings') }}" class="nav-link">Configuración</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                    </a>
+                </li>
+
+                <!-- Acordeón para Contenido -->
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#contenidoCollapse" role="button"
+                        aria-expanded="false" aria-controls="contenidoCollapse">
+                        <i class="fas fa-book"></i> Contenido
+                    </a>
+                    <div class="collapse" id="contenidoCollapse">
+                        <ul class="nav flex-column ps-3">
+                            <li class="nav-item"><a class="nav-link" href="#">Traducciones</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Páginas</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#">Emails</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Acordeón Productos -->
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#productosCollapse" role="button"
+                        aria-expanded="false" aria-controls="productosCollapse">
+                        <i class="fas fa-cogs"></i> Productos
+                    </a>
+                    <div class="collapse" id="productosCollapse">
+                        <ul class="nav flex-column ps-3">
+                            <li class="nav-item"><a class="nav-link" href="#">Propiedades</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#">Zonas</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Acordeón para Admin -->
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="collapse" href="#adminCollapse" role="button"
+                        aria-expanded="false" aria-controls="adminCollapse">
+                        <i class="fas fa-cogs"></i> Admin
+                    </a>
+                    <div class="collapse" id="adminCollapse">
+                        <ul class="nav flex-column ps-3">
+                            <li class="nav-item"><a class="nav-link" href="#">Admins</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#">Logs</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <!-- Enlace de Logout -->
+                    <form action="{{ route('logout') }}" method="POST" id="logout-form" class="d-inline">
+                        @csrf
+                        <button type="submit" class="nav-link">
+                            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </button>
+                    </form>
+
+                </li>
             </ul>
         </div>
+
 
         <!-- Contenido principal -->
         <div class="content-container">
