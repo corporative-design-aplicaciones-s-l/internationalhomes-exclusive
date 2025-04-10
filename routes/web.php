@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PropertyController;
 use App\Http\Controllers\Front\SearchController;
@@ -38,6 +39,10 @@ Route::get('/propiedades', [PropertyController::class, 'index'])->name('properti
 
 // ABOUT
 Route::get('/nosotros', fn() => view('about.index'))->name('about');
+
+// ENVIROMENT
+Route::get('/entorno', [EnvironmentController::class, 'index'])->name('environment');
+Route::get('/entorno/{slug}', fn($slug) => view('environment.show', ['slug' => $slug]))->name('location.show');
 
 // CONTACT
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

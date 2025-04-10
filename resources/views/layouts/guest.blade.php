@@ -7,6 +7,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+
     <style>
         body {
             font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
@@ -19,6 +20,8 @@
         a {
             text-decoration: none;
         }
+
+        @yield('style','')
     </style>
 </head>
 <body>
