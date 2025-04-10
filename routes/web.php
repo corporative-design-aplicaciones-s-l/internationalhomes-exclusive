@@ -33,6 +33,7 @@ Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 
 // PROPERTIES
 Route::get('/propiedad/{slug}', [PropertyController::class, 'show'])->name('property.show');
+Route::get('/propiedades', [PropertyController::class, 'index'])->name('properties.index');
 
 
 

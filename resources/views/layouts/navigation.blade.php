@@ -15,7 +15,7 @@
                     <a class="nav-link" href="{{ url('/') }}">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Propiedades</a>
+                    <a class="nav-link" href="{{ route('properties.index') }}">Propiedades</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Nosotros</a>

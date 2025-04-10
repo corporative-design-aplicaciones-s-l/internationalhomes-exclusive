@@ -10,3 +10,103 @@
 a:hover .hover-opacity-100 {
     opacity: 1 !important;
 }
+
+.btn-main {
+    background-color: #1d1d1f;
+    color: white;
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 8px 20px;
+}
+
+.btn-main:hover {
+    background-color: #000;
+}
+
+
+/* Optional: quitar azul de select */
+
+select.form-select {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    border-color: #ccc;
+}
+
+.pagination {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    font-size: 14px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination .page-item {
+    border-radius: 50%;
+    border: none;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #1d1d1f;
+    /* color gris oscuro de fondo */
+    color: white;
+    border: none;
+}
+
+.pagination .page-link {
+    padding: 6px 12px;
+    border-radius: 50%;
+    background-color: #f0f0f5;
+    /* color suave de fondo */
+    color: #333;
+    /* color gris oscuro */
+    border: none;
+}
+
+.pagination .page-link:hover {
+    background-color: #e5e5e8;
+    /* color suave de hover */
+    color: #1d1d1f;
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #ccc;
+    /* para los items deshabilitados */
+    pointer-events: none;
+}
+
+
+/* Estilo de los botones del modal */
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.modal-body {
+    background-color: #fff;
+}
+
+.form-check-label {
+    font-weight: 500;
+}
+
+.select2-container .select2-selection--single {
+    border-radius: 8px;
+}
+
+
+/* Botón aplicar */
+
+.btn-main {
+    background-color: #1d1d1f;
+    color: white;
+    border-radius: 10px;
+    font-weight: 500;
+    padding: 8px 20px;
+}
+
+.btn-main:hover {
+    background-color: #000;
+}
