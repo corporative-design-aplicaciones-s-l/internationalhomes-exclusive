@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PropertyController;
 use App\Http\Controllers\Front\SearchController;
@@ -35,6 +36,11 @@ Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 Route::get('/propiedad/{slug}', [PropertyController::class, 'show'])->name('property.show');
 Route::get('/propiedades', [PropertyController::class, 'index'])->name('properties.index');
 
+// ABOUT
+Route::get('/nosotros', fn() => view('about.index'))->name('about');
+
+// CONTACT
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 
 require __DIR__.'/auth.php';
