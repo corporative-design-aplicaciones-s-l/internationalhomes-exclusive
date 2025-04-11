@@ -17,6 +17,5 @@
         </form>
     </td>
 
-    {{-- Modal inline para editar --}}
-    @include('admin.zonas._edit-modal', ['zona' => $zona])
+
 </tr>

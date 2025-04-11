@@ -9,11 +9,19 @@ class Zona extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nombre'];
+    protected $fillable = [
+        'nombre',
+        'imagen_principal',
+    ];
 
     public function properties()
     {
         return $this->hasMany(Property::class);
+    }
+
+    public function secciones()
+    {
+        return $this->hasMany(ZonaSection::class);
     }
 }
 

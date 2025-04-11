@@ -31,6 +31,9 @@
                     @endforeach
                 </tbody>
             </table>
+            @foreach ($zonas as $zona)
+                @include('admin.zonas._edit-modal', ['zona' => $zona])
+            @endforeach
 
         </div>
     </div>
@@ -38,7 +41,8 @@
     {{-- Modal de creación --}}
     <div class="modal fade" id="createZonaModal" tabindex="-1" aria-labelledby="createZonaModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <form action="{{ route('admin.zonas.store') }}" method="POST" class="modal-content">
+            <form action="{{ route('admin.zonas.store') }}" method="POST" enctype="multipart/form-data"
+                class="modal-content">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="createZonaModalLabel">Nueva Zona</h5>
@@ -49,83 +53,94 @@
                         <label class="form-label">Nombre</label>
                         <input type="text" name="nombre" class="form-control" required>
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Imagen principal</label>
+                        <input type="file" name="imagen_principal" class="form-control" accept="image/*">
+                    </div>
+
+                    <hr>
+                    <h6 class="fw-semibold">Secciones</h6>
+                    <div id="secciones-container">
+                        <div class="zona-seccion border rounded p-3 mb-3 bg-light">
+                            <div class="mb-2">
+                                <label class="form-label">Título</label>
+                                <input type="text" name="secciones[0][titulo]" class="form-control">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Imagen</label>
+                                <input type="file" name="secciones[0][imagen]" class="form-control" accept="image/*">
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Descripción</label>
+                                <textarea name="secciones[0][descripcion]" class="form-control" rows="2"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="add-seccion">+ Añadir
+                        sección</button>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-main">Guardar</button>
                 </div>
             </form>
+
         </div>
     </div>
 @endsection
 
 @section('scripts')
-        document.addEventListener("DOMContentLoaded", function() {
-            // Crear zona
-            const createForm = document.querySelector('#createZonaModal form');
-            createForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(this);
+    document.addEventListener("DOMContentLoaded", function () {
+    let seccionIndex = 1;
 
-                fetch(this.action, {
-                        method: 'POST',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        },
-                        body: formData
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                        document.querySelector('#zona-tbody').insertAdjacentHTML('beforeend', data
-                        .html);
-                        this.reset();
-                        bootstrap.Modal.getInstance(document.getElementById('createZonaModal')).hide();
-                    });
-            });
+    document.getElementById('add-seccion').addEventListener('click', () => {
+    const container = document.getElementById('secciones-container');
+    const html = `
+    <div class="zona-seccion border rounded p-3 mb-3 bg-light">
+        <div class="mb-2">
+            <label class="form-label">Título</label>
+            <input type="text" name="secciones[${seccionIndex}][titulo]" class="form-control">
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Imagen</label>
+            <input type="file" name="secciones[${seccionIndex}][imagen]" class="form-control" accept="image/*">
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Descripción</label>
+            <textarea name="secciones[${seccionIndex}][descripcion]" class="form-control" rows="2"></textarea>
+        </div>
+    </div>
+    `;
+    container.insertAdjacentHTML('beforeend', html);
+    seccionIndex++;
+    });
+    });
 
-            // Editar zona (delegado)
-            document.querySelectorAll('.zona-edit-form').forEach(form => {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const formData = new FormData(this);
-                    const id = this.dataset.id;
+    let zonaSeccionCounters = {};
 
-                    fetch(this.action, {
-                            method: 'POST',
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest'
-                            },
-                            body: formData
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            document.querySelector(`#zona-row-${id}`).outerHTML = data.html;
-                            bootstrap.Modal.getInstance(document.getElementById(
-                                `editZonaModal${id}`)).hide();
-                        });
-                });
-            });
+    function addSeccion(zonaId) {
+    const container = document.getElementById('secciones-container-' + zonaId);
+    const index = container.querySelectorAll('.zona-seccion').length;
 
-            // Eliminar zona
-            document.querySelectorAll('.zona-delete-form').forEach(form => {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const id = this.dataset.id;
-                    if (confirm('¿Seguro que deseas eliminar esta zona?')) {
-                        fetch(this.action, {
-                            method: 'POST',
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'X-CSRF-TOKEN': this.querySelector('[name=_token]').value
-                            },
-                            body: new URLSearchParams({
-                                _method: 'DELETE'
-                            })
-                        }).then(() => {
-                            document.querySelector(`#zona-row-${id}`).remove();
-                        });
-                    }
-                });
-            });
-        });
+    const sectionHTML = `
+    <div class="zona-seccion border rounded p-3 mb-3 bg-light">
+        <div class="mb-2">
+            <label class="form-label">Título</label>
+            <input type="text" name="secciones[${index}][titulo]" class="form-control">
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Imagen</label>
+            <input type="file" name="secciones[${index}][imagen]" class="form-control">
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Descripción</label>
+            <textarea name="secciones[${index}][descripcion]" class="form-control"></textarea>
+        </div>
+    </div>
+    `;
+
+    container.insertAdjacentHTML('beforeend', sectionHTML);
+    }
+
 @endsection

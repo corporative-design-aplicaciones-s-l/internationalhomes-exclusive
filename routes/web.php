@@ -49,7 +49,7 @@ Route::get('/nosotros', fn() => view('about.index'))->name('about');
 
 // ENVIROMENT
 Route::get('/entorno', [EnvironmentController::class, 'index'])->name('environment');
-Route::get('/entorno/{slug}', fn($slug) => view('environment.show', ['slug' => $slug]))->name('location.show');
+Route::get('/entorno/{slug}', [EnvironmentController::class, 'show'])->name('zonas.show');
 
 // CONTACT
 Route::get('/contact', fn() => view('contact.index'))->name('contact');

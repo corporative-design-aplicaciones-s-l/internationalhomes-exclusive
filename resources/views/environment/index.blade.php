@@ -7,6 +7,8 @@
 @endsection
 
 @section('content')
+    @php use Illuminate\Support\Str; @endphp
+
     <section class="hero-image"
         style="background: url('/images/environment-hero.jpg') no-repeat center center; background-size: cover; height: 60vh;">
         <div class="container d-flex align-items-center h-100">
@@ -24,17 +26,19 @@
 
     {{-- Ubicaciones --}}
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach ($locations as $location => $image)
+    <div class="row row-cols-1 row-cols-md-3 g-4 mx-4 justify-content-center">
+        @foreach ($zonas as $zona)
             <div class="col">
-                <div class="card position-relative">
-                    <img src="{{ $image }}" class="card-img-top" alt="{{ $location }}">
+                <div class="card position-relative border-0 shadow-sm">
+                    <img src="{{ asset('storage/' . $zona->imagen_principal) }}" class="card-img-top w-100"
+                        style="height: 240px; object-fit: cover;" alt="{{ $zona->nombre }}">
                     <div class="card-img-overlay d-flex justify-content-center align-items-center">
-                        <h4 class="text-white fw-semibold"
-                            style="background-color: rgba(0, 0, 0, 0.6); padding: 10px 20px; border-radius: 5px;">
-                            {{ $location }}</h4>
+                        <h4 class="text-white fw-semibold text-center"
+                            style="background-color: rgba(29, 29, 31, 0.65); padding: 12px 24px; border-radius: 12px; font-size: 1.25rem;">
+                            {{ $zona->nombre }}
+                        </h4>
                     </div>
-                    <a href="{{ route('location.show', ['slug' => Str::slug($location)]) }}" class="stretched-link"></a>
+                    <a href="{{ route('zonas.show', ['slug' => Str::slug($zona->nombre)]) }}" class="stretched-link"></a>
                 </div>
             </div>
         @endforeach
