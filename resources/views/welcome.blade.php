@@ -54,7 +54,7 @@
                         <div class="swiper-slide">
                             <a href="{{ route('guest.property.show', $property->slug) }}" class="d-block position-relative"
                                 style="aspect-ratio: 1/1; overflow: hidden;">
-                                <img src="{{ $property->image }}" class="w-100 h-100" style="object-fit: cover;"
+                                <img src="{{ 'storage/'.$property->thumbnail }}" class="w-100 h-100" style="object-fit: cover;"
                                     alt="{{ $property->title }}">
                                 <div class="position-absolute bottom-0 start-0 end-0 p-2 text-white"
                                     style="background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);">

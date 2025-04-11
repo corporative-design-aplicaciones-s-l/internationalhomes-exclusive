@@ -59,6 +59,7 @@ class PropertyController extends Controller
             'tiene_solar' => 'nullable|boolean',
             'metros_solar' => 'nullable|integer',
             'tiene_patio' => 'nullable|boolean',
+            'destacada' => 'nullable|boolean',
             'tiene_piscina' => 'nullable|boolean',
             'images.*' => 'nullable|image|max:5120',
         ]);
@@ -83,6 +84,7 @@ class PropertyController extends Controller
             'tiene_solar' => $request->has('tiene_solar'),
             'metros_solar' => $request->metros_solar,
             'tiene_patio' => $request->has('tiene_patio'),
+            'is_featured' => $request->has('destacada'),
             'tiene_piscina' => $request->has('tiene_piscina'),
         ]);
 
@@ -108,6 +110,7 @@ class PropertyController extends Controller
                 } else {
                     PropertyImage::create([
                         'property_id' => $property->id,
+                        'url' => "storage/$path",
                         'path' => $path,
                     ]);
                 }
@@ -153,6 +156,7 @@ class PropertyController extends Controller
             'metros_solar' => 'nullable|integer',
             'tiene_patio' => 'nullable|boolean',
             'tiene_piscina' => 'nullable|boolean',
+            'destacada' => 'nullable|boolean',
             'images.*' => 'nullable|image|max:5120',
         ]);
 
@@ -175,6 +179,7 @@ class PropertyController extends Controller
             'tiene_solar' => $request->has('tiene_solar'),
             'metros_solar' => $request->metros_solar,
             'tiene_patio' => $request->has('tiene_patio'),
+            'is_featured' => $request->has('destacada'),
             'tiene_piscina' => $request->has('tiene_piscina'),
         ]);
 
@@ -189,6 +194,7 @@ class PropertyController extends Controller
                 } else {
                     PropertyImage::create([
                         'property_id' => $property->id,
+                        'url' => "storage/$path",
                         'path' => $path,
                     ]);
                 }

@@ -16,6 +16,7 @@ class Property extends Model
         'location',
         'price',
         'tipo',
+        'is_featured',
         'description',
         'description_en',
         'description_fr',

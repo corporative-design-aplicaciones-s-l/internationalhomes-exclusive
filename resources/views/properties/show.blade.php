@@ -37,12 +37,12 @@
             <div class="col-lg-8">
                 {{-- Imagen principal (1ª de la galería) --}}
                 @php
-                    $mainImage = $property->thumbnail ? "storage/{$property->thumbnail}" : $property->image;
+                    $mainImage = $property->thumbnail ?? $property->image;
                 @endphp
 
-                <a href="{{ $mainImage }}" class="glightbox position-relative d-block overflow-hidden"
+                <a href="{{ asset('storage/' . $mainImage) }}" class="glightbox position-relative d-block overflow-hidden"
                     data-gallery="property-gallery" style="aspect-ratio: 4/3;">
-                    <img id="mainImage" src="{{ asset($mainImage) }}" class="w-100 h-100" style="object-fit: cover;"
+                    <img id="mainImage" src="{{ asset('storage/' . $mainImage) }}" class="w-100 h-100" style="object-fit: cover;"
                         alt="{{ $property->title }}">
                     {{-- Icono lupa como antes --}}
                 </a>
@@ -51,9 +51,9 @@
                 <div class="row g-2 mt-2">
                     @foreach ($property->images as $index => $img)
                         <div class="col-3">
-                            <a href="{{ $img->url }}" class="glightbox" data-gallery="property-gallery"
-                                onclick="event.preventDefault(); document.getElementById('mainImage').src='{{ $img->url }}'">
-                                <img src="{{ $img->url }}" class="w-100 border"
+                            <a href="{{ asset('storage/' . $img->path) }}" class="glightbox" data-gallery="property-gallery"
+                                >
+                                <img src="{{ asset('storage/' . $img->path) }}" class="w-100 border"
                                     style="cursor: pointer; aspect-ratio: 1/1; object-fit: cover;"
                                     alt="Miniatura {{ $index + 1 }}">
                             </a>
@@ -120,15 +120,15 @@
 
                         @if ($property->tiene_patio)
                             <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-seedling me-1"></i>Patio</small>
-                                <div class="fw-semibold">Sí</div>
+                                <small class="text-muted"><i class="fas fa-seedling me-1"></i></small>
+                                <div class="fw-semibold">Jardín</div>
                             </div>
                         @endif
 
                         @if ($property->tiene_piscina)
                             <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-water me-1"></i>Piscina</small>
-                                <div class="fw-semibold">Sí</div>
+                                <small class="text-muted"><i class="fas fa-water me-1"></i></small>
+                                <div class="fw-semibold">Piscina</div>
                             </div>
                         @endif
                     </div>

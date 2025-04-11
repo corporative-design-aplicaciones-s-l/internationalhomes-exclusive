@@ -10,12 +10,12 @@
             @forelse($results as $property)
                 <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow-sm">
-                        <img src="{{ $property->image }}" class="card-img-top" alt="{{ $property->title }}">
-                        <div class="card-body">
+                        <img src="{{ "storage/{$property->thumbnail}" }}" class="card-img-top" alt="{{ $property->title }}">
+                       <div class="card-body">
                             <h5 class="card-title">{{ $property->title }}</h5>
                             <p class="card-text">€{{ number_format($property->price, 0, ',', '.') }} ·
                                 {{ $property->bedrooms }} hab · {{ $property->bathrooms }} baños</p>
-                            <a href="#" class="btn btn-outline-dark btn-sm">Ver más</a>
+                            <a href="{{ route('guest.property.show', $property->slug) }}" class="btn btn-outline-dark btn-sm">Ver más</a>
                         </div>
                     </div>
                 </div>
