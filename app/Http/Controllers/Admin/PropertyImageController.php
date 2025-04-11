@@ -10,12 +10,16 @@ use Illuminate\Support\Facades\Storage;
 
 class PropertyImageController extends Controller
 {
-    public function destroy(PropertyImage $image)
+    public function destroy($id)
     {
+        $image = PropertyImage::findOrFail($id);
+
+        // Eliminar archivo del disco
         Storage::disk('public')->delete($image->path);
+
         $image->delete();
 
-        return back()->with('success', 'Imagen eliminada correctamente.');
+        return response()->json(['success' => true, 'message' => 'Imagen eliminada']);
     }
 
     public function setThumbnail(Property $property, PropertyImage $image)

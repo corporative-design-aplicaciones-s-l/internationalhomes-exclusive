@@ -192,7 +192,7 @@
                             {{-- Imagen --}}
                             <div class="col-md-4">
                                 <a href="{{ route('guest.property.show', $property->slug) }}">
-                                    <img src="{{ $property->image }}" alt="{{ $property->title }}" class="w-100 h-100"
+                                    <img src="{{ 'storage/'.$property->thumbnail }}" alt="{{ $property->title }}" class="w-100 h-100"
                                         style="object-fit: cover; aspect-ratio: 4/3;">
                                 </a>
                             </div>

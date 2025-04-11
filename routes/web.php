@@ -65,7 +65,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::patch('properties/{property}/images/{image}/set-thumbnail', [PropertyImageController::class, 'setThumbnail'])
         ->name('properties.images.set-thumbnail');
 
-    Route::delete('properties/images/{image}', [PropertyImageController::class, 'destroy'])
+    Route::delete('properties/images/{id}', [PropertyImageController::class, 'destroy'])
         ->name('properties.images.destroy');
 
     //ZONAS

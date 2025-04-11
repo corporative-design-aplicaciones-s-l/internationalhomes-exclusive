@@ -49,17 +49,17 @@
 <div class="row">
     <div class="mb-3 col-md-4">
         <label class="form-label">Habitaciones</label>
-        <input type="number" name="habitaciones" class="form-control" value="{{ old('habitaciones', $property->habitaciones ?? '') }}">
+        <input type="number" name="habitaciones" class="form-control" value="{{ old('habitaciones', $property->bedrooms ?? '') }}">
     </div>
 
     <div class="mb-3 col-md-4">
         <label class="form-label">Baños</label>
-        <input type="number" name="banos" class="form-control" value="{{ old('banos', $property->banos ?? '') }}">
+        <input type="number" name="banos" class="form-control" value="{{ old('banos', $property->bathrooms ?? '') }}">
     </div>
 
     <div class="mb-3 col-md-4">
         <label class="form-label">Metros construidos</label>
-        <input type="number" name="metros" class="form-control" value="{{ old('metros', $property->metros ?? '') }}">
+        <input type="number" name="metros" class="form-control" value="{{ old('metros', $property->area ?? '') }}">
     </div>
 </div>
 

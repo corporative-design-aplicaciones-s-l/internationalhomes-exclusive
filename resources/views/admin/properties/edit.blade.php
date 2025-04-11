@@ -46,41 +46,16 @@
                 @include('admin.properties._form')
                 @if ($property->images->count() > 0)
                     <h5 class="mt-4">Imágenes actuales</h5>
-                    <div class="row mb-4">
-                        @foreach ($property->images as $image)
-                            <div class="col-6 col-sm-4 col-md-3 col-lg-2 position-relative mb-3">
-                                <img src="{{ asset('storage/' . $image->path) }}"
-                                    class="img-fluid rounded shadow-sm {{ $property->thumbnail === $image->path ? 'border border-success border-3' : '' }}"
-                                    style="height: 100px; object-fit: cover; width: 100%;">
-
-                                @if ($property->thumbnail === $image->path)
-                                    <div class="position-absolute bottom-0 start-0 bg-success text-white px-2 py-1 small">
-                                        Thumbnail</div>
-                                @else
-                                    <form
-                                        action="{{ route('admin.properties.images.set-thumbnail', [$property->id, $image->id]) }}"
-                                        method="POST" class="position-absolute bottom-0 start-0">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="btn btn-sm btn-outline-success w-100 rounded-0"
-                                            style="font-size: 0.75rem;">
-                                            Usar como principal
-                                        </button>
-                                    </form>
-                                @endif
-
-                                <form action="{{ route('admin.properties.images.destroy', $image) }}" method="POST"
-                                    class="position-absolute top-0 end-0 me-1 mt-1">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger px-2 py-1" title="Eliminar imagen"
-                                        onclick="return confirm('¿Eliminar esta imagen?')">
-                                        &times;
+                        <div class="row g-2">
+                            @foreach ($property->images as $image)
+                                <div class="col-3 position-relative">
+                                    <img src="{{ asset('storage/' . $image->path) }}" class="img-fluid rounded" style="object-fit: cover; aspect-ratio: 1/1;">
+                                    <button class="btn btn-sm btn-danger position-absolute top-0 end-0 m-1" onclick="deleteImage({{ $image->id }})">
+                                        <i class="fas fa-trash-alt"></i>
                                     </button>
-                                </form>
-                            </div>
-                        @endforeach
-                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                 @endif
                 <div class="mb-4">
                     <label class="form-label">Añadir nuevas imágenes</label>
@@ -147,6 +122,25 @@
         previewContainer.appendChild(col);
         };
         reader.readAsDataURL(file);
+        });
+        }
+        function deleteImage(id) {
+        if (!confirm("¿Seguro que quieres eliminar esta imagen?")) return;
+
+        fetch("{{ url('/admin/properties/images') }}/" + id, {
+        method: 'DELETE',
+        headers: {
+        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+        'Accept': 'application/json',
+        }
+        })
+        .then(res => res.json())
+        .then(data => {
+        if (data.success) {
+        location.reload(); // recarga el modal para reflejar los cambios
+        } else {
+        alert('No se pudo eliminar la imagen');
+        }
         });
         }
     @endsection

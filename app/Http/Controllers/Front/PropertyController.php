@@ -12,34 +12,59 @@ class PropertyController extends Controller
     {
         $properties = Property::query();
 
-        if ($request->filled('features')) {
-            $properties->whereHas('features', function ($query) use ($request) {
-                $query->whereIn('name', $request->features);
-            });
+        // Filtro: tipo
+        if ($request->filled('tipo')) {
+            $properties->whereIn('tipo', $request->input('tipo'));
         }
 
-        if ($request->filled('state')) {
-            $properties->where('state', $request->state);
+        // Filtro: zona
+        if ($request->filled('zona')) {
+            $properties->whereIn('zona_id', $request->input('zona'));
         }
 
-        // Filtros por vistas, habitaciones, etc.
-        if ($request->filled('views')) {
-            $properties->where('views', $request->views);
+        // Filtro: precio mínimo y máximo
+        if ($request->filled('precio_min')) {
+            $properties->where('price', '>=', $request->input('precio_min'));
         }
 
-        if ($request->filled('bedrooms')) {
-            $properties->where('bedrooms', '>=', $request->bedrooms);
+        if ($request->filled('precio_max')) {
+            $properties->where('price', '<=', $request->input('precio_max'));
         }
 
-        if ($request->filled('bathrooms')) {
-            $properties->where('bathrooms', '>=', $request->bathrooms);
+        // Filtro: habitaciones mínimas
+        if ($request->filled('habitaciones')) {
+            $properties->where('habitaciones', '>=', $request->input('habitaciones'));
+        }
+
+        // Filtro: baños mínimos
+        if ($request->filled('banos')) {
+            $properties->where('banos', '>=', $request->input('banos'));
+        }
+
+        // Filtro: superficie construida mínima
+        if ($request->filled('metros')) {
+            $properties->where('metros', '>=', $request->input('metros'));
+        }
+
+        // Filtro: solar, patio, piscina
+        if ($request->boolean('tiene_solar')) {
+            $properties->where('tiene_solar', true);
+        }
+
+        if ($request->boolean('tiene_patio')) {
+            $properties->where('tiene_patio', true);
+        }
+
+        if ($request->boolean('tiene_piscina')) {
+            $properties->where('tiene_piscina', true);
         }
 
         // Paginación
-        $properties = $properties->paginate(12)->withQueryString();
+        $properties = $properties->with('zona')->paginate(12)->withQueryString();
 
         return view('properties.index', compact('properties'));
     }
+
     public function show($slug)
     {
         $property = Property::where('slug', $slug)->with('images')->firstOrFail();

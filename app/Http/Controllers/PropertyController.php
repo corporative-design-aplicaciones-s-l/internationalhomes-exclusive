@@ -7,7 +7,7 @@ use App\Models\PropertyImage;
 use App\Models\Propietario;
 use App\Models\Zona;
 use Illuminate\Http\Request;
-use Str;
+use Illuminate\Support\Str;
 
 class PropertyController extends Controller
 {
@@ -19,7 +19,7 @@ class PropertyController extends Controller
             $search = $request->search;
             $query->where('title', 'like', "%$search%")
                 ->orWhere('location', 'like', "%$search%")
-                ->orWhere('reference', 'like', "%$search%");
+                ->orWhere('ref', 'like', "%$search%");
         }
 
         $properties = $query->latest()->paginate(10);
@@ -60,10 +60,11 @@ class PropertyController extends Controller
             'metros_solar' => 'nullable|integer',
             'tiene_patio' => 'nullable|boolean',
             'tiene_piscina' => 'nullable|boolean',
-            'images.*' => 'nullable|image|max:5120', // 5MB por imagen
+            'images.*' => 'nullable|image|max:5120',
         ]);
 
-        // Crear propiedad
+
+
         $property = Property::create([
             'title' => $request->title,
             'location' => $request->location,
@@ -85,7 +86,7 @@ class PropertyController extends Controller
             'tiene_piscina' => $request->has('tiene_piscina'),
         ]);
 
-        // Generar slug único
+        // Slug único
         $baseSlug = Str::slug($request->title);
         $slug = $baseSlug;
         $count = 2;
@@ -94,13 +95,12 @@ class PropertyController extends Controller
         }
         $property->slug = $slug;
 
-        // Generar ref tipo R-[id]
-        $property->ref = 'R-' . $property->id;
+        // Referencia tipo R-[id]
+        $property->ref = "R-{$property->id}";
 
-        // Procesar imágenes
+        // Guardar imágenes
         if ($request->hasFile('images')) {
-            $images = $request->file('images');
-            foreach ($images as $index => $image) {
+            foreach ($request->file('images') as $index => $image) {
                 $path = $image->store('properties', 'public');
 
                 if ($index === 0) {
@@ -120,14 +120,13 @@ class PropertyController extends Controller
             ->with('success', 'Propiedad creada correctamente.');
     }
 
-
-
     public function edit($id)
     {
         $zonas = Zona::all();
         $propietarios = Propietario::all();
 
-        $property = Property::findOrFail($id);
+        $property = Property::with('images')->findOrFail($id); // <- AÑADIDO with('images')
+
         return view('admin.properties.edit', compact('property', 'zonas', 'propietarios'));
     }
 
@@ -137,19 +136,78 @@ class PropertyController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric',
-            // Otros campos según sea necesario
+            'location' => 'nullable|string',
+            'price' => 'nullable|numeric',
+            'tipo' => 'nullable|string|max:100',
+            'zona_id' => 'nullable|exists:zonas,id',
+            'propietario_id' => 'nullable|exists:propietarios,id',
+            'description' => 'nullable|string',
+            'description_en' => 'nullable|string',
+            'description_fr' => 'nullable|string',
+            'description_de' => 'nullable|string',
+            'description_ru' => 'nullable|string',
+            'banos' => 'nullable|integer',
+            'habitaciones' => 'nullable|integer',
+            'metros' => 'nullable|integer',
+            'tiene_solar' => 'nullable|boolean',
+            'metros_solar' => 'nullable|integer',
+            'tiene_patio' => 'nullable|boolean',
+            'tiene_piscina' => 'nullable|boolean',
+            'images.*' => 'nullable|image|max:5120',
         ]);
 
-        $property->update($request->all());
-        return redirect()->route('admin.properties.index')->with('success', 'Propiedad actualizada exitosamente.');
+        // Actualizar campos
+        $property->update([
+            'title' => $request->title,
+            'location' => $request->location,
+            'price' => $request->price,
+            'tipo' => $request->tipo,
+            'zona_id' => $request->zona_id,
+            'propietario_id' => $request->propietario_id,
+            'description' => $request->description,
+            'description_en' => $request->description_en,
+            'description_fr' => $request->description_fr,
+            'description_de' => $request->description_de,
+            'description_ru' => $request->description_ru,
+            'bathrooms' => $request->banos,
+            'bedrooms' => $request->habitaciones,
+            'area' => $request->metros,
+            'tiene_solar' => $request->has('tiene_solar'),
+            'metros_solar' => $request->metros_solar,
+            'tiene_patio' => $request->has('tiene_patio'),
+            'tiene_piscina' => $request->has('tiene_piscina'),
+        ]);
+
+        // Procesar nuevas imágenes si se suben
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $index => $image) {
+                $path = $image->store('properties', 'public');
+
+                // Si no hay thumbnail aún o se reemplaza
+                if ($index === 0 && !$property->thumbnail) {
+                    $property->thumbnail = $path;
+                } else {
+                    PropertyImage::create([
+                        'property_id' => $property->id,
+                        'path' => $path,
+                    ]);
+                }
+            }
+
+            $property->save();
+        }
+
+        return redirect()->route('admin.properties.index')
+            ->with('success', 'Propiedad actualizada correctamente.');
     }
+
 
     public function destroy($id)
     {
         $property = Property::findOrFail($id);
         $property->delete();
-        return redirect()->route('admin.properties.index')->with('success', 'Propiedad eliminada exitosamente.');
+
+        return redirect()->route('admin.properties.index')
+            ->with('success', 'Propiedad eliminada exitosamente.');
     }
 }
