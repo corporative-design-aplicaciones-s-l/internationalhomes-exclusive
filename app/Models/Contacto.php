@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PropertyImage extends Model
+class Contacto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['property_id', 'path'];
+    protected $fillable = ['nombre', 'email', 'telefono', 'mensaje', 'property_id'];
 
     public function property()
     {

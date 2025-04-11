@@ -25,7 +25,7 @@
         </div>
 
         <div class="mt-4">
-            {{ $results->withQueryString()->links() }}
+            {{ $results->withQueryString()->links('pagination::bootstrap-5') }}
         </div>
     </div>
 @endsection

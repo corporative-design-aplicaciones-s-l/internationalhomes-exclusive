@@ -12,101 +12,121 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            margin: 0;
+        }
+
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            height: 100vh;
         }
 
         .sidebar {
-            min-height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 250px;
             background-color: #1d1d1f;
-            padding-top: 20px;
-            padding-left: 15px;
-            z-index: 1000;
-            font-family: 'Poppins', sans-serif;
+            padding: 20px 15px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
         }
 
         .sidebar h3 {
-            font-weight: 600;
-            color: white;
-            margin-bottom: 30px;
-            font-family: 'Poppins', sans-serif;
-
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
-        /* Asegura que los elementos del sidebar se alineen correctamente */
         .sidebar .nav-link {
             color: white;
-            font-size: 16px;
-            font-family: 'Poppins', sans-serif;
-
+            padding: 8px 10px;
+            display: block;
+            font-weight: 500;
         }
 
         .sidebar .nav-link:hover {
             background-color: #333;
-        }
-
-        /* Contenido principal */
-        .container-fluid {
-            display: flex;
-            flex-direction: row;
-            background-color: #b0925531;
-            height: 100vh;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
+            border-radius: 6px;
         }
 
         .content-container {
-            flex-grow: 1;
-            /* Toma todo el espacio disponible */
             padding: 30px;
-            overflow-x: hidden;
-            /* Evita el scroll horizontal */
             background-color: #f4f4f9;
-        }
-
-        .col-md-9 {
-            margin-left: 250px;
-            /* Deja espacio para el sidebar */
-            padding: 30px;
+            height: 100vh;
             width: 100%;
-            overflow-x: hidden;
-            /* Evita el scroll horizontal */
-            background-color: #f4f4f9;
-            /* Fondo claro para el contenido */
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        h1 {
-            font-weight: 600;
-            color: #333;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Botones del backoffice */
         .btn-main {
             background-color: #d4a52d;
             color: white;
             border-radius: 10px;
             font-weight: 500;
             padding: 8px 20px;
-            width: 100%;
-            font-family: 'Poppins', sans-serif;
-
         }
 
         .btn-main:hover {
             background-color: #000;
         }
 
-        .btn-link:hover {
-            color: #d4a52d;
+        .accordion-body {
+            background-color: #2a2a2a;
+            border-left: 3px solid #d4a52d;
+            border-radius: 5px;
+        }
+
+        .nav .nav-link {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #menu-toggle {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border:
+                #57575738;
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            display: none !important;
+        }
+
+        img.border-success {
+            box-shadow: 0 0 0 3px #198754 !important;
+        }
+
+        @media (max-width: 991.98px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 250px;
+                height: 100vh;
+                background-color: #1d1d1f;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1050;
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            #menu-toggle {
+                display: inline-block;
+            }
         }
     </style>
 </head>
 
 <body class="bg-backoffice">
     <div class="container-fluid d-flex p-0">
+        <!-- Botón hamburguesa visible solo en móvil -->
         <!-- Sidebar -->
         <div class="sidebar">
             <h3 class="text-center">
@@ -119,57 +139,66 @@
                         <i class="fas fa-tachometer-alt"></i> Dashboard
                     </a>
                 </li>
-
-                <!-- Acordeón para Contenido -->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#contenidoCollapse" role="button"
-                        aria-expanded="false" aria-controls="contenidoCollapse">
-                        <i class="fas fa-book"></i> Contenido
-                    </a>
-                    <div class="collapse" id="contenidoCollapse">
-                        <ul class="nav flex-column ps-3">
-                            <li class="nav-item"><a class="nav-link" href="#">Traducciones</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">Páginas</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="#">Emails</a>
-                            </li>
-                        </ul>
+                <div class="nav flex-column" id="accordionNav">
+                    <div class="accordion-item">
+                        <!-- Acordeón para Contenido -->
+                        <button class="nav-link collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#contenidoCollapse" aria-expanded="false" aria-controls="contenidoCollapse">
+                            Contenido
+                        </button>
+                        <div id="contenidoCollapse" class="accordion-collapse collapse" data-bs-parent="#accordionNav">
+                            <div class="accordion-body">
+                                <ul class="nav flex-column ps-3">
+                                    <li class="nav-item"><a class="nav-link" href="#">Traducciones</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Páginas</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Emails</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </li>
-
-                <!-- Acordeón Productos -->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#productosCollapse" role="button"
-                        aria-expanded="false" aria-controls="productosCollapse">
-                        <i class="fas fa-cogs"></i> Productos
-                    </a>
-                    <div class="collapse" id="productosCollapse">
-                        <ul class="nav flex-column ps-3">
-                            <li class="nav-item"><a class="nav-link" href="#">Propiedades</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="#">Zonas</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
-                        </ul>
+                    <!-- Acordeón Propiedades -->
+                    <div class="accordion-item">
+                        <button class="nav-link collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#propiedadesCollapse" aria-expanded="false"
+                            aria-controls="propiedadesCollapse">
+                            Propiedades
+                        </button>
+                        <div id="propiedadesCollapse" class="accordion-collapse collapse"
+                            data-bs-parent="#accordionNav">
+                            <div class="accordion-body">
+                                <ul class="nav flex-column ps-3">
+                                    <li class="nav-item"><a class="nav-link"
+                                            href="{{ route('admin.properties.index') }}">Propiedades</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.zonas.index') }}">Zonas</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </li>
+                    <!-- Acordeón para Admin -->
 
-                <!-- Acordeón para Admin -->
-                <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="collapse" href="#adminCollapse" role="button"
-                        aria-expanded="false" aria-controls="adminCollapse">
-                        <i class="fas fa-cogs"></i> Admin
-                    </a>
-                    <div class="collapse" id="adminCollapse">
-                        <ul class="nav flex-column ps-3">
-                            <li class="nav-item"><a class="nav-link" href="#">Admins</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="#">Logs</a>
-                            </li>
-                            <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
-                        </ul>
+                    <div class="accordion-item">
+                        <button class="nav-link collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#adminCollapse" aria-expanded="false" aria-controls="adminCollapse">
+                            Admin
+                        </button>
+                        <div id="adminCollapse" class="accordion-collapse collapse" data-bs-parent="#accordionNav">
+                            <div class="accordion-body">
+                                <ul class="nav flex-column ps-3">
+                                    <li class="nav-item"><a class="nav-link" href="#">Admins</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Logs</a>
+                                    </li>
+                                    <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </li>
+                </div>
 
                 <li class="nav-item">
                     <!-- Enlace de Logout -->
@@ -187,11 +216,30 @@
 
         <!-- Contenido principal -->
         <div class="content-container">
+            <!-- Botón hamburguesa visible solo en móvil -->
+            <button id="menu-toggle" class="btn btn-main d-lg-none mb-3 text-black" aria-label="Abrir menú">
+                &#9776; <!-- símbolo de tres rayas -->
+            </button>
+
             @yield('content')
+
         </div>
     </div>
 
-    <script src="{{ mix('js/app.js') }}"></script> <!-- Si tienes JavaScript personalizado -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggle = document.getElementById("menu-toggle");
+            const sidebar = document.querySelector(".sidebar");
+
+            toggle.addEventListener("click", () => {
+                sidebar.classList.toggle("open");
+            });
+        });
+
+        @yield('scripts')
+    </script>
+
+
 </body>
 
 </html>

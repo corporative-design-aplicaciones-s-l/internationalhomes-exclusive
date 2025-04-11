@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap" rel="stylesheet">
 
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/swiper.js'])
     @yield('style', '')
 
     <style>
@@ -35,6 +35,7 @@
 
     <main class="pb-4">
         @yield('content')
+        @yield('slider')
     </main>
 
     <footer class="text-center text-muted border-top py-4 mt-5">

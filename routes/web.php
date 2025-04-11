@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\PropertyImageController;
+use App\Http\Controllers\Admin\ZonaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EnvironmentController;
@@ -54,21 +56,31 @@ Route::get('/contact', fn() => view('contact.index'))->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // ADMIN
-Route::middleware(['auth', 'admin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     // Dashboard
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     // Propiedades
-    Route::resource('admin/properties', AdminPropertyController::class);
+    Route::resource('properties', AdminPropertyController::class);
+    Route::patch('properties/{property}/images/{image}/set-thumbnail', [PropertyImageController::class, 'setThumbnail'])
+        ->name('properties.images.set-thumbnail');
+
+    Route::delete('properties/images/{image}', [PropertyImageController::class, 'destroy'])
+        ->name('properties.images.destroy');
+
+    //ZONAS
+    Route::resource('zonas', ZonaController::class)->names('zonas');
+
+
 
     // Gestión de usuarios
-    Route::resource('admin/users', UserController::class);
+    Route::resource('users', UserController::class);
 
     // Informes
-    Route::get('admin/reports', [ReportController::class, 'index'])->name('admin.reports');
+    Route::get('reports', [ReportController::class, 'index'])->name('reports');
 
     // Configuración
-    Route::get('admin/settings', [SettingsController::class, 'index'])->name('admin.settings');
+    Route::get('settings', [SettingsController::class, 'index'])->name('settings');
 });
 
 

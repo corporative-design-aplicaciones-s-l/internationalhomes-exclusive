@@ -2,6 +2,11 @@
 
 @section('title', 'Inicio')
 
+@section('style')
+<link href="{{ asset(path: 'css/slider.css') }}" rel="stylesheet">
+
+@endsection
+
 @section('content')
     {{-- Hero principal --}}
     <section class="position-relative bg-dark text-white"

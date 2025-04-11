@@ -9,7 +9,7 @@
 @section('content')
     {{-- Buscador --}}
     <div class="bg-light py-4 border-bottom">
-        <form method="GET" action="{{ route('properties.index') }}" class="container">
+        <form method="GET" action="{{ route('admin.properties.index') }}" class="container">
             <div class="row g-2 align-items-center justify-content-center">
                 {{-- Tipo de propiedad --}}
                 <div class="col-md-2 dropdown">

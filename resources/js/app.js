@@ -1,7 +1,6 @@
 import './bootstrap';
 import 'bootstrap';
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
+
 import Alpine from 'alpinejs';
 import GLightbox from 'glightbox';
 import 'glightbox/dist/css/glightbox.css';
@@ -12,7 +11,7 @@ import 'leaflet/dist/leaflet.css';
 
 window.Alpine = Alpine;
 Alpine.start();
-window.Swiper = Swiper;
+
 document.addEventListener('DOMContentLoaded', function() {
     const lightbox = GLightbox({
         selector: '.glightbox',

@@ -1,0 +1,8 @@
+/* Mostrar solo cuando el contenedor del slider esté presente */
+
+.featured-properties .swiper-button-prev,
+.featured-properties .swiper-button-next {
+    display: flex !important;
+    color: #1d1d1f;
+    font-size: 32px;
+}
