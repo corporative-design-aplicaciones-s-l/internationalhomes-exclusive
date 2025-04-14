@@ -7,8 +7,8 @@
     <title>@yield('title', 'Domatia')</title>
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/swiper.js'])
     @yield('style', '')
 
@@ -40,7 +40,7 @@
     </main>
 
     <footer class="text-center text-muted border-top py-4 mt-5">
-        © {{ date('Y') }} Domatia. Todos los derechos reservados.
+        © {{ date('Y') }} International Homes. Todos los derechos reservados.
     </footer>
 
     @stack('scripts')
@@ -48,6 +48,7 @@
     <script>
         AOS.init();
     </script>
+    @yield('scripts')
 </body>
 
 </html>

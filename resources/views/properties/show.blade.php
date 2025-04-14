@@ -51,9 +51,9 @@
                 <div class="row g-2 mt-2">
                     @foreach ($property->images as $index => $img)
                         <div class="col-3">
-                            <a href="{{ asset('storage/' . $img->path) }}" class="glightbox" data-gallery="property-gallery"
+                            <a href="{{ asset("storage/{$img->path}") }}" class="glightbox" data-gallery="property-gallery"
                                 >
-                                <img src="{{ asset('storage/' . $img->path) }}" class="w-100 border"
+                                <img src="{{ asset("storage/{$img->path}") }}" class="w-100 border"
                                     style="cursor: pointer; aspect-ratio: 1/1; object-fit: cover;"
                                     alt="Miniatura {{ $index + 1 }}">
                             </a>

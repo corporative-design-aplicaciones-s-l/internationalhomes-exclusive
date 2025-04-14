@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
     <div class="container">
         <a class="navbar-brand fw-bold text-uppercase" href="{{ url('/') }}">
-            Domatia
+            <img src="{{ asset('images/logo/logo.svg') }}" alt="Domatia" style="height: 52px;">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -17,9 +17,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('guest.properties.index') }}">Propiedades</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('about') }}">Nosotros</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('environment') }}">Entorno</a>
                 </li>
