@@ -23,6 +23,11 @@
                     <input type="file" name="imagen_principal" class="form-control">
                 </div>
 
+                <div class="mb-3">
+                    <label class="form-label">Contenido adicional</label>
+                    <textarea name="contenido_html" class="form-control" rows="10">{{ old('contenido_html', $zona->contenido_html) }}</textarea>
+                </div>
+
                 <hr>
                 <h6 class="fw-semibold">Secciones</h6>
                 <div id="secciones-container-{{ $zona->id }}">

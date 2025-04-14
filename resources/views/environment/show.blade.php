@@ -14,6 +14,13 @@
         </div>
     </section>
 
+    @if ($zona->contenido_html)
+        <section class="container py-5">
+            {!! $zona->contenido_html !!}
+        </section>
+    @endif
+
+
     <!-- Secciones dentro de la zona -->
     @php
         $bgClasses = ['bg-light', 'bg-white'];
@@ -49,7 +56,8 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $property->title }}</h5>
                                 <p class="card-text">{{ Str::limit($property->description, 100) }}</p>
-                                <a href="{{ route('guest.property.show', $property->slug) }}" class="btn btn-dark">Ver más</a>
+                                <a href="{{ route('guest.property.show', $property->slug) }}" class="btn btn-dark">Ver
+                                    más</a>
                             </div>
                         </div>
                     </div>

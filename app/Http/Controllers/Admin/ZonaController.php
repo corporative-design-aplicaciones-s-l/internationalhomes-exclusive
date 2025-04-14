@@ -25,11 +25,13 @@ class ZonaController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'imagen' => 'nullable|image|max:5120',
+            'imagen_principal' => 'nullable|image|max:5120',
+            'contenido_html' => 'nullable|string',
         ]);
 
         $zona = new Zona();
         $zona->nombre = $request->nombre;
+        $zona->contenido_html = $request->contenido_html;
 
         if ($request->hasFile('imagen_principal')) {
             $ruta = $request->file('imagen_principal')->store('zonas', 'public');
@@ -51,10 +53,10 @@ class ZonaController extends Controller
                     $zonaSeccion->imagen = $ruta;
                 }
 
-
                 $zonaSeccion->save();
             }
         }
+
         $zonas = Zona::orderBy('nombre')->get();
         return view('admin.zonas.index', compact('zonas'));
     }
@@ -63,13 +65,14 @@ class ZonaController extends Controller
     {
         $request->validate([
             'nombre' => 'required|string|max:255',
-            'imagen' => 'nullable|image|max:5120',
+            'imagen_principal' => 'nullable|image|max:5120',
+            'contenido_html' => 'nullable|string',
         ]);
 
         $zona->nombre = $request->nombre;
+        $zona->contenido_html = $request->contenido_html;
 
         if ($request->hasFile('imagen_principal')) {
-            // Borrar imagen anterior si existe
             if ($zona->imagen_principal) {
                 Storage::disk('public')->delete($zona->imagen_principal);
             }
@@ -80,8 +83,6 @@ class ZonaController extends Controller
 
         $zona->save();
 
-        // Actualizar secciones existentes (o ignorar si se hace en otro modal)
-        // Si se gestionan en el mismo formulario, aquí habría que eliminar las anteriores y recrearlas:
         $zona->secciones()->delete();
 
         if ($request->has('secciones')) {
@@ -99,6 +100,7 @@ class ZonaController extends Controller
                 $zonaSeccion->save();
             }
         }
+
         $zonas = Zona::orderBy('nombre')->get();
         return view('admin.zonas.index', compact('zonas'));
     }

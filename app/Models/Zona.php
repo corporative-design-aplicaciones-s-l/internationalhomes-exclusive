@@ -14,6 +14,7 @@ class Zona extends Model
         'nombre',
         'imagen_principal',
         'slug',
+        'contenido_html',
     ];
 
     public function properties()

@@ -60,22 +60,9 @@
                     </div>
 
                     <hr>
-                    <h6 class="fw-semibold">Secciones</h6>
-                    <div id="secciones-container">
-                        <div class="zona-seccion border rounded p-3 mb-3 bg-light">
-                            <div class="mb-2">
-                                <label class="form-label">Título</label>
-                                <input type="text" name="secciones[0][titulo]" class="form-control">
-                            </div>
-                            <div class="mb-2">
-                                <label class="form-label">Imagen</label>
-                                <input type="file" name="secciones[0][imagen]" class="form-control" accept="image/*">
-                            </div>
-                            <div class="mb-2">
-                                <label class="form-label">Descripción</label>
-                                <textarea name="secciones[0][descripcion]" class="form-control" rows="2"></textarea>
-                            </div>
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Contenido adicional</label>
+                        <textarea id="contenido_html" name="contenido_html" class="form-control" rows="10">{{ old('contenido_html', $zona->contenido_html) }}</textarea>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary" id="add-seccion">+ Añadir
                         sección</button>
@@ -142,5 +129,6 @@
 
     container.insertAdjacentHTML('beforeend', sectionHTML);
     }
+
 
 @endsection
