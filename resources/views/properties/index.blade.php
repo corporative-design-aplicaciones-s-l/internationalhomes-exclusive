@@ -228,7 +228,7 @@
 
                                 <div class="d-flex justify-content-between align-items-end">
                                     <div class="text-muted small d-flex gap-3">
-                                        <span><i class="bi bi-house-door me-1"></i>{{ $property->area }} m²</span>
+                                        <span><i class="bi bi-house-door me-1"></i>{{ number_format($property->area / 100, 2, ',', '.') }} m²</span>
                                         <span><i class="bi bi-door-open me-1"></i>{{ $property->bedrooms }} hab</span>
                                         <span><i class="bi bi-bucket me-1"></i>{{ $property->bathrooms }} baños</span>
                                     </div>

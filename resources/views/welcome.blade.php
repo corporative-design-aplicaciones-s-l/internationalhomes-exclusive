@@ -168,9 +168,9 @@
 
                                 {{-- Iconitos con datos --}}
                                 <div class="d-flex justify-content-between text-muted small mb-3 text-center">
-                                    <div><i class="fas fa-ruler-combined d-block mb-1"></i>{{ $property->area ?? '-' }} m²
+                                    <div><i class="fas fa-ruler-combined d-block mb-1"></i>{{ number_format($property->area / 100, 2, ',', '.') }} m²
                                     </div>
-                                    <div><i class="fas fa-expand d-block mb-1"></i>{{ $property->metros_solar ?? '-' }} m²
+                                    <div><i class="fas fa-expand d-block mb-1"></i>{{ number_format($property->metros_solar / 100, 2, ',', '.') }} m²
                                     </div>
                                     <div><i class="fas fa-bed d-block mb-1"></i>{{ $property->bedrooms ?? '-' }}</div>
                                     <div><i class="fas fa-bath d-block mb-1"></i>{{ $property->bathrooms ?? '-' }}</div>

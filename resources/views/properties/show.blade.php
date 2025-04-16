@@ -3,166 +3,217 @@
 @section('title', $property->title)
 
 @section('style')
-    <script>
-        /* Estilos específicos para la página de propiedades */
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-        .hero - image {
-                background - color: #f1f1f1;
-                padding: 50 px 0;
-            }
+        .main-image-container {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            border-radius: 8px;
+        }
 
-            .card {
-                border - radius: 10 px;
-                box - shadow: 0 4 px 10 px rgba(0, 0, 0, 0.1);
-            }
+        .main-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
 
-            .card - img - top {
-                width: 100 % ;
-                height: 100 % ;
-                object - fit: cover;
-                transition: transform 0.3 s ease;
-            }
+        .main-image-container:hover img {
+            transform: scale(1.02);
+        }
 
-            .card - img - top: hover {
-                transform: scale(1.05);
-            }
-    </script>
+        .thumbnail img {
+            border-radius: 6px;
+            transition: transform 0.2s ease;
+        }
+
+        .thumbnail:hover img {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 6px 10px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+
+        .favorite-btn.active {
+            background-color: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+
+        .favorite-btn i {
+            font-size: 18px;
+        }
+
+        .thumb-wrapper {
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .thumb-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .thumb-nav {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 @endsection
 
 @section('content')
-
     <div class="container py-5">
         <div class="row">
-            {{-- Galería de imágenes (70%) --}}
-            <div class="col-lg-8">
-                {{-- Imagen principal (1ª de la galería) --}}
+            {{-- Galería de imágenes --}}
+            <div class="col-lg-8 position-relative">
                 @php
                     $mainImage = $property->thumbnail ?? $property->image;
                 @endphp
 
                 <a href="{{ asset('storage/' . $mainImage) }}" class="glightbox position-relative d-block overflow-hidden"
                     data-gallery="property-gallery" style="aspect-ratio: 4/3;">
-                    <img id="mainImage" src="{{ asset('storage/' . $mainImage) }}" class="w-100 h-100" style="object-fit: cover;"
-                        alt="{{ $property->title }}">
-                    {{-- Icono lupa como antes --}}
+                    <img id="mainImage" src="{{ asset('storage/' . $mainImage) }}" class="w-100 h-100 rounded"
+                        style="object-fit: cover;" alt="{{ $property->title }}">
                 </a>
 
-                {{-- Miniaturas debajo --}}
-                <div class="row g-2 mt-2">
-                    @foreach ($property->images as $index => $img)
-                        <div class="col-3">
-                            <a href="{{ asset("storage/{$img->path}") }}" class="glightbox" data-gallery="property-gallery"
-                                >
-                                <img src="{{ asset("storage/{$img->path}") }}" class="w-100 border"
-                                    style="cursor: pointer; aspect-ratio: 1/1; object-fit: cover;"
-                                    alt="Miniatura {{ $index + 1 }}">
-                            </a>
+                <button class="btn btn-light position-absolute top-0 end-0 m-2 rounded-circle shadow-sm favorite-btn">
+                    <i class="bi bi-heart"></i>
+                </button>
+
+                <div class="mt-3 position-relative">
+                    <button
+                        class="thumb-nav prev btn btn-light shadow-sm rounded-circle position-absolute top-50 start-0 translate-middle-y z-3">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <div class="thumb-wrapper overflow-hidden px-4">
+                        <div class="thumb-row d-flex flex-nowrap gap-2">
+                            @foreach ($property->images as $index => $img)
+                                <div class="thumbnail" style="flex: 0 0 auto; width: 80px;">
+                                    <a href="{{ asset("storage/{$img->path}") }}" class="glightbox"
+                                        data-gallery="property-gallery">
+                                        <img src="{{ asset("storage/{$img->path}") }}" class="w-100 border rounded"
+                                            style="aspect-ratio: 1/1; object-fit: cover;"
+                                            alt="Miniatura {{ $index + 1 }}">
+                                    </a>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+                    <button
+                        class="thumb-nav next btn btn-light shadow-sm rounded-circle position-absolute top-50 end-0 translate-middle-y z-3">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
                 </div>
+
             </div>
 
-            {{-- Formulario + Info --}}
+            {{-- Info rápida --}}
             <div class="col-lg-4">
-
-                {{-- Información rápida de propiedad --}}
-                <div class="border rounded p-4 shadow-sm">
+                <div class="border rounded p-4 shadow-sm mb-4">
                     <h5 class="mb-2">{{ $property->title }}</h5>
-                    <p class="text-muted mb-1"><i class="fas fa-map-marker-alt me-1"></i>{{ $property->zona->nombre }}</p>
-                    <p class="text-muted small mb-3"></i>Ref:
-                        <strong>{{ $property->ref }}</strong>
+                    <p class="text-muted small mb-1"><i class="fas fa-map-marker-alt me-1"></i>{{ $property->zona->nombre }}
                     </p>
+                    <p class="text-muted small mb-3">Ref: <strong>{{ $property->ref }}</strong></p>
                     <h4 class="text-primary"><i
                             class="fas fa-euro-sign me-1"></i>{{ number_format($property->price, 0, ',', '.') }}</h4>
-
-                    <hr class="my-3">
-
-                    <div class="row text-center gy-3">
-                        <div class="row my-4">
-                            {{-- TIPO --}}
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-home me-1"></i></small>
-                                <div class="fw-semibold">{{ ucfirst($property->tipo ?? 'N/D') }}</div>
-                            </div>
-
-                            {{-- UBICACION --}}
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-location-dot me-1"></i></small>
-                                <div class="fw-semibold">{{ $property->location ?? 'N/D' }}</div>
-                            </div>
+                    <hr>
+                    {{-- Iconitos --}}
+                    <div class="d-flex flex-wrap gap-4 justify-content-between text-center small">
+                        <div><i class="fas fa-home me-1"></i>{{ ucfirst($property->tipo ?? '-') }}</div>
+                        <div><i class="fas fa-bed me-1"></i>{{ $property->bedrooms }} hab</div>
+                        <div><i class="fas fa-bath me-1"></i>{{ $property->bathrooms }} baños</div>
+                        <div><i
+                                class="fas fa-ruler-combined me-1"></i>{{ number_format($property->area / 100, 2, ',', '.') }}
+                            m²
                         </div>
-
-                        <div class="row mb-2">
-                            {{-- HABITACIONES --}}
-                            <div class="col-4">
-                                <small class="text-muted"><i class="fas fa-bed me-1"></i></small>
-                                <div class="fw-semibold">{{ $property->bedrooms ?? '-' }}</div>
-                            </div>
-                            {{-- BAÑOS --}}
-                            <div class="col-4">
-                                <small class="text-muted"><i class="fas fa-bath me-1"></i></small>
-                                <div class="fw-semibold">{{ $property->bathrooms ?? '-' }}</div>
-                            </div>
-                            {{-- CONSTRUIDOS --}}
-                            <div class="col-4">
-                                <small class="text-muted"><i class="fas fa-ruler-combined me-1"></i></small>
-                                <div class="fw-semibold">{{ $property->area ?number_format($property->area, 2, ',') :'-' }} m²</div>
-                            </div>
-                        </div>
-
-                        {{-- SOLAR --}}
                         @if ($property->tiene_solar)
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-border-none me-1"></i></small>
-                                <div class="fw-semibold">{{ $property->metros_solar ? number_format($property->metros_solar, 2, ',','.') :'-' }} m²</div>
-                            </div>
+                            <div><i
+                                    class="fas fa-border-none me-1"></i>{{ number_format($property->metros_solar / 100, 2, ',', '.') }}
+                                m² solarium</div>
                         @endif
-
                         @if ($property->tiene_patio)
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-seedling me-1"></i></small>
-                                <div class="fw-semibold">Jardín</div>
-                            </div>
+                            <div><i class="fas fa-tree me-1"></i>Jardín</div>
                         @endif
-
                         @if ($property->tiene_piscina)
-                            <div class="col-6">
-                                <small class="text-muted"><i class="fas fa-water me-1"></i></small>
-                                <div class="fw-semibold">Piscina</div>
-                            </div>
+                            <div><i class="fas fa-water me-1"></i>Piscina</div>
                         @endif
                     </div>
                 </div>
+
+                {{-- Formulario --}}
+                <div class="border rounded p-4 shadow-sm mb-4" id="formulario">
+                    <h5 class="mb-4">Solicita información</h5>
+                    <form action="#" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Tu nombre completo *</label>
+                            <input type="text" name="name" class="form-control" placeholder="p.ej: María">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tu email *</label>
+                            <input type="email" name="email" class="form-control" placeholder="p.ej: nombre@email.com">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tu teléfono *</label>
+                            <input type="tel" name="phone" class="form-control" placeholder="+34">
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100 py-2 fs-5">
+                            <i class="bi bi-send me-2"></i>Enviar solicitud
+                        </button>
+                    </form>
+                </div>
             </div>
+
         </div>
 
-        {{-- Descripción completa --}}
-        <div class="row">
-            <div class="mt-5">
-                <h5 class="fw-semibold">Descripción</h5>
-                <p style="white-space: pre-line;">{{ $property->description }}</p>
-            </div>
-            {{-- Formulario --}}
-            <div class="border rounded p-4 shadow-sm mb-4">
-                <h5 class="mb-4">Solicita información</h5>
-                <form action="#" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label class="form-label">Tu nombre completo *</label>
-                        <input type="text" name="name" class="form-control" placeholder="p.ej: María">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Tu email *</label>
-                        <input type="email" name="email" class="form-control" placeholder="p.ej: nombre@email.com">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Tu teléfono *</label>
-                        <input type="tel" name="phone" class="form-control" placeholder="+34">
-                    </div>
-                    <button type="submit" class="btn btn-dark w-100">Enviar</button>
-                </form>
-            </div>
+        {{-- Descripción --}}
+        <div class="mt-5">
+            <h5 class="fw-semibold">Descripción</h5>
+            <p style="white-space: pre-line;">{{ $property->description }}</p>
         </div>
+
+
     </div>
 @endsection
 
+@section('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const wrapper = document.querySelector('.thumb-wrapper');
+            const prev = document.querySelector('.thumb-nav.prev');
+            const next = document.querySelector('.thumb-nav.next');
+
+            const scrollAmount = 100;
+
+            prev.addEventListener('click', () => {
+                wrapper.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            next.addEventListener('click', () => {
+                wrapper.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+@endsection
