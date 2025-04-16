@@ -12,24 +12,37 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav gap-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/') }}">Inicio</a>
+                    <a class="nav-link" href="{{ url('/') }}">{{ __('navbar.home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guest.properties.index') }}">Propiedades</a>
-                </li>
-                {{-- <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about') }}">Nosotros</a>
-                </li> --}}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('environment') }}">Entorno</a>
+                    <a class="nav-link" href="{{ route('guest.properties.index') }}">{{ __('navbar.properties') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contact') }}">Contacto</a>
+                    <a class="nav-link" href="{{ route('environment') }}">{{ __('navbar.environment') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('contact') }}">{{ __('navbar.contact') }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('guest.properties.favorites') }}">
-                        <i class="bi bi-heart-fill me-1"></i>
+                        <i class="bi bi-heart-fill me-1"></i> {{ __('navbar.favorites') }}
                     </a>
+                </li>
+
+                {{-- Selector de idioma --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown">
+                        🌐 {{ strtoupper(app()->getLocale()) }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
+                        @foreach (['es' => 'ES', 'en' => 'EN', 'fr' => 'FR', 'de' => 'DE'] as $lang => $label)
+                            <li>
+                                <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}">
+                                    {{ $label }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </li>
             </ul>
         </div>

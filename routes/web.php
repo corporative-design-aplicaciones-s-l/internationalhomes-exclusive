@@ -32,6 +32,15 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
+// IDIOMAS
+Route::get('/lang/{locale}', function ($locale) {
+    if (in_array($locale, ['es', 'en', 'fr', 'de'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
