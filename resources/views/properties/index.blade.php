@@ -3,7 +3,17 @@
 @section('title', 'Propiedades en venta')
 
 @section('style')
-<link href="{{ asset('css/properties.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/properties.css') }}" rel="stylesheet">
+    <style>
+        .favorite-btn {
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: background-color 0.2s;
+        }
+
+        .favorite-btn:hover {
+            background-color: rgba(240, 240, 240, 1);
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -73,7 +83,7 @@
                 </div>
 
                 {{-- Más filtros (opcional modal) --}}
-                <div class="col-md-2 d-flex gap-2">
+                <div class="col-md-3 d-flex gap-2">
                     <button type="button" class="btn btn-outline-dark w-100" data-bs-toggle="modal"
                         data-bs-target="#filtersModal">
                         <i class="bi bi-sliders"></i> Más filtros
@@ -179,7 +189,6 @@
         </div>
     </div>
 
-
     <section class="pt-5">
         <div class="container">
             <h1 class="mb-4 fw-light text-center">Propiedades en venta</h1>
@@ -187,23 +196,24 @@
             {{-- Grid de propiedades --}}
             <div class="row gx-0 gy-4">
                 @forelse($properties as $property)
-                    <div class="card mb-4 border-0 shadow-sm overflow-hidden">
+                    <div class="card mb-4 border-0 shadow-sm overflow-hidden position-relative">
                         <div class="row g-0">
+
                             {{-- Imagen --}}
                             <div class="col-md-4">
+
                                 <a href="{{ route('guest.property.show', $property->slug) }}">
-                                    <img src="{{ 'storage/'.$property->thumbnail }}" alt="{{ $property->title }}" class="w-100 h-100"
-                                        style="object-fit: cover; aspect-ratio: 4/3;">
+                                    <img src="{{ "storage/{$property->thumbnail}" }}" alt="{{ $property->title }}"
+                                        class="w-100 h-100" style="object-fit: cover; aspect-ratio: 4/3;">
                                 </a>
                             </div>
 
                             {{-- Detalles --}}
                             <div class="col-md-8 d-flex flex-column justify-content-between p-3">
-                                {{-- Encabezado --}}
                                 <div>
+
                                     <p class="text-muted small mb-1">
                                         {{ $property->location ?? 'Ubicación desconocida' }}
-                                        {{-- - Ref: {{ $property->id }} --}}
                                     </p>
                                     <h5 class="mb-2">
                                         <a href="{{ route('guest.property.show', $property->slug) }}"
@@ -211,35 +221,45 @@
                                             {{ $property->title }}
                                         </a>
                                     </h5>
-
                                     <p class="text-muted small">
                                         {{ Str::limit($property->description, 200) }}
                                     </p>
                                 </div>
 
-                                {{-- Iconos + precio --}}
                                 <div class="d-flex justify-content-between align-items-end">
                                     <div class="text-muted small d-flex gap-3">
                                         <span><i class="bi bi-house-door me-1"></i>{{ $property->area }} m²</span>
                                         <span><i class="bi bi-door-open me-1"></i>{{ $property->bedrooms }} hab</span>
                                         <span><i class="bi bi-bucket me-1"></i>{{ $property->bathrooms }} baños</span>
                                     </div>
-
                                     <div class="text-primary fw-semibold fs-5">
                                         €{{ number_format($property->price, 0, ',', '.') }}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @if ($property->tag)
-                        <span
-                            class="position-absolute top-0 start-0 m-2 badge bg-warning text-dark">{{ $property->tag }}</span>
-                    @endif
-                @empty
-                    <div class="text-center py-5">
-                        <p>No se encontraron propiedades.</p>
-                    </div>
+
+                        {{-- Favorito --}}
+                        @php
+                            $favs = explode(',', request()->cookie('favorites', ''));
+                            $isFav = in_array($property->id, $favs);
+                        @endphp
+
+                        <btn
+                            class="link text-danger position-absolute top-0 end-0 m-2 favorite-btn {{ $isFav ? 'active' : '' }}"
+                            data-id="{{ $property->id }}">
+                            <i class="bi {{ $isFav ? 'bi-heart-fill' : 'bi-heart' }}"></i>
+                        </button>
+
+
+                        @if ($property->tag)
+                            <span
+                                class="position-absolute top-0 start-0 m-2 badge bg-warning text-dark">{{ $property->tag }}</span>
+                        @endif
+                    @empty
+                        <div class="text-center py-5">
+                            <p>No se encontraron propiedades.</p>
+                        </div>
                 @endforelse
             </div>
 
@@ -249,4 +269,110 @@
             </div>
         </div>
     </section>
+
+    {{-- Últimas vistas --}}
+    @if (session('recent_properties'))
+        <section class="bg-light py-5">
+            <div class="container">
+                <h4 class="mb-4">Tus últimas propiedades vistas</h4>
+                <div class="row">
+                    @foreach (session('recent_properties') as $recent)
+                        <div class="col-md-4 mb-3">
+                            <a href="{{ route('guest.property.show', $recent->slug) }}"
+                                class="text-decoration-none text-dark">
+                                <div class="card h-100 shadow-sm">
+                                    <img src="{{ asset("storage/{$recent->thumbnail}") }}" class="card-img-top"
+                                        style="aspect-ratio: 4/3; object-fit: cover;">
+                                    <div class="card-body">
+                                        <h6 class="card-title">{{ $recent->title }}</h6>
+                                        <p class="text-primary fw-semibold">
+                                            €{{ number_format($recent->price, 0, ',', '.') }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+    @if ($recentProperties->count())
+        <section class="pt-4">
+            <h3 class="mb-4 fw-light text-center">Últimas viviendas vistas</h3>
+            <div class="row gx-0 gy-4">
+                @foreach ($recentProperties as $property)
+                    <div class="col-md-3 m-4">
+                        <a href="{{ route('guest.property.show', $property->slug) }}"
+                            class="text-decoration-none text-dark">
+                            <div class="card mb-4 border-0 shadow-sm overflow-hidden position-relative">
+                                <img src="{{ asset('storage/' . $property->thumbnail) }}" class="card-img-top"
+                                    alt="{{ $property->title }}">
+                                <div class="card-body">
+                                    <h6 class="card-title mb-1">{{ $property->title }}</h6>
+                                    <small class="text-muted">€{{ number_format($property->price, 0, ',', '.') }}</small>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
+    {{-- Enlace a favoritas --}}
+    <section class="text-center my-5">
+        <a href="{{ route('guest.properties.favorites') }}" class="btn btn-dark px-5 py-3">
+            <i class="bi bi-heart-fill me-2"></i> Ver propiedades favoritas
+        </a>
+    </section>
+@endsection
+
+@section('scripts')
+    <script>
+        function getFavorites() {
+            const favs = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('favorites='));
+
+            return favs ? favs.split('=')[1].split(',').map(Number) : [];
+        }
+
+        function saveFavorites(favs) {
+            document.cookie = `favorites=${favs.join(',')}; path=/; max-age=${60 * 60 * 24 * 30}`;
+            console.table(document.cookie);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const favorites = getFavorites();
+
+            document.querySelectorAll('.favorite-btn').forEach(btn => {
+                const id = parseInt(btn.dataset.id);
+
+                // Inicializar icono
+                if (favorites.includes(id)) {
+                    btn.classList.add('active');
+                    btn.querySelector('i').classList.remove('bi-heart');
+                    btn.querySelector('i').classList.add('bi-heart-fill');
+                }
+
+                btn.addEventListener('click', () => {
+                    let favs = getFavorites();
+
+                    if (favs.includes(id)) {
+                        favs = favs.filter(f => f !== id);
+                        btn.classList.remove('active');
+                        btn.querySelector('i').classList.remove('bi-heart-fill');
+                        btn.querySelector('i').classList.add('bi-heart');
+                    } else {
+                        favs.push(id);
+                        btn.classList.add('active');
+                        btn.querySelector('i').classList.remove('bi-heart');
+                        btn.querySelector('i').classList.add('bi-heart-fill');
+                    }
+
+                    saveFavorites(favs);
+                });
+            });
+        });
+    </script>
 @endsection

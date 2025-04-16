@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ZonaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EnvironmentController;
+use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PropertyController;
 use App\Http\Controllers\PropertyController as AdminPropertyController;
@@ -43,6 +44,9 @@ Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 // PROPERTIES
 Route::get('/propiedad/{slug}', [PropertyController::class, 'show'])->name('guest.property.show');
 Route::get('/propiedades', [PropertyController::class, 'index'])->name('guest.properties.index');
+Route::get('/favoritos', [PropertyController::class, 'favoritos'])->name('guest.properties.favorites');
+Route::post('/toggle-favorite', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
+
 
 // ABOUT
 Route::get('/nosotros', fn() => view('about.index'))->name('about');

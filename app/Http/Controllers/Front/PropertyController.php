@@ -12,6 +12,20 @@ class PropertyController extends Controller
     {
         $properties = Property::query();
 
+        $recentIds = json_decode(request()->cookie('recent_properties', '[]'), true);
+        $favIds = explode(',', request()->cookie('favorites', ''));
+
+        $recentProperties = collect();
+        if (!empty($recentIds)) {
+            $recentProperties = Property::whereIn('id', $recentIds)->get()->keyBy('id');
+            $recentProperties = collect($recentIds)->map(fn($id) => $recentProperties[$id] ?? null)->filter();
+        }
+
+        $favProperties = collect();
+        if (!empty($favIds)) {
+            $favProperties = Property::whereIn('id', $favIds)->get();
+        }
+
         // Filtro: tipo
         if ($request->filled('tipo')) {
             $properties->whereIn('tipo', $request->input('tipo'));
@@ -62,12 +76,30 @@ class PropertyController extends Controller
         // Paginación
         $properties = $properties->with('zona')->paginate(12)->withQueryString();
 
-        return view('properties.index', compact('properties'));
+        return view('properties.index', compact('properties', 'recentProperties', 'favProperties'));
     }
 
     public function show($slug)
     {
         $property = Property::where('slug', $slug)->with('images')->firstOrFail();
+        $recent = json_decode(request()->cookie('recent_properties', '[]'), true);
+        $recent = array_filter($recent, fn($id) => $id !== $property->id);
+        array_unshift($recent, $property->id);
+        $recent = array_slice($recent, 0, 3);
+
+        cookie()->queue(cookie('recent_properties', json_encode($recent), 43200));
+
         return view('properties.show', compact('property'));
     }
+
+    public function favoritos()
+    {
+        $favIds = explode(',', request()->cookie('favorites', ''));
+        dd(request()->cookie());
+
+        $favorites = Property::whereIn('id', $favIds)->get();
+
+        return view('properties.favorites', compact('favorites'));
+    }
+
 }
