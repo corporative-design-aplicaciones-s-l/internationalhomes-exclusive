@@ -173,7 +173,7 @@
                     <div
                         class="container h-100 d-flex align-items-center justify-content-center position-absolute top-0 start-0 end-0 bottom-0">
                         <div class="text-center text-white">
-                            <h1 class="display-4 fw-light">Conoce el entorno</h1>
+                            <h1 class="display-4 fw-light">@lang('environmentIndex.page_title')</h1>
                         </div>
                     </div>
                 </div>
@@ -189,25 +189,13 @@
                         class="img-fluid rounded shadow-sm w-100">
                 </div>
                 <div class="col-md-6">
-                    <h2 class="mb-4 fw-semibold">Condado de Alhama</h2>
-                    <p>
-                        Ubicado en el corazón de la <strong>Costa Cálida murciana</strong>, el Condado de Alhama Golf Resort
-                        combina naturaleza, deporte y comodidad. Con vistas a la <strong>Sierra Espuña</strong> y a tan solo
-                        minutos de <strong>Cartagena</strong>, <strong>Mazarrón</strong> y <strong>Murcia capital</strong>,
-                        es un enclave privilegiado.
-                    </p>
-                    <p>
-                        Aquí disfrutarás de un entorno seguro y tranquilo, con propiedades modernas como
-                        <strong>apartamentos, villas y bungalows</strong>, diseñados para vivir todo el año o pasar largas
-                        temporadas. Terrazas, soláriums, jardines y piscinas hacen del resort un lugar ideal para el
-                        bienestar.
-                    </p>
-                    <p>
-                        Además del entorno natural, destaca el <strong>campo de golf Alhama Signature</strong>, diseñado por
-                        Jack Nicklaus, y servicios como el centro comercial <strong>Al Kasar</strong>, supermercados, zonas
-                        deportivas y restaurantes. Todo lo que necesitas, en un lugar que apuesta por el crecimiento y la
-                        calidad de vida.
-                    </p>
+                    <h2 class="mb-4 fw-semibold">@lang('environmentIndex.section_title')</h2>
+                    <p>@lang('environmentIndex.paragraph_1')</p>
+
+                    <p>@lang('environmentIndex.paragraph_2')</p>
+
+                    <p>@lang('environmentIndex.paragraph_3')</p>
+
                     {{-- Galería con Lightbox --}}
                     <div class="row mt-5 g-3 justify-content-center" data-aos="fade-up">
                         @foreach (['entorno1.jpg', 'entorno2.jpg', 'entorno3.jpg', 'entorno4.jpg', 'entorno5.png', 'entorno6.png', 'entorno7.jpg', 'entorno9.png'] as $i => $img)
@@ -230,7 +218,7 @@
     <section class="w-100 py-5 bg-light data-aos="fade-up"">
         <div class="container-fluid px-2 text-center">
 
-            <h2>Mapa de la zona</h2>
+            <h2>@lang('environmentIndex.map_title')</h2>
             {{-- Mapa interactivo --}}
             <div class="map-container position-relative" id="mapContainer">
                 <img src="{{ asset('images/map/MASTER-PLAN-BASE-GENERAL.png') }}" alt="Mapa Interactivo" class="map-image">
@@ -344,7 +332,7 @@
     {{-- Ubicaciones --}}
     <section class="w-100 py-5 ">
         <div class="container-fluid px-5 text-center">
-            <h2>Las zonas</h2>
+            <h2>@lang('environmentIndex.zones_title')</h2>
             <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center mt-4">
 
                 @foreach ($zonas as $zona)

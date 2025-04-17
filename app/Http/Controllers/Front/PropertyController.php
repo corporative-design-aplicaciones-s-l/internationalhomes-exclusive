@@ -95,7 +95,7 @@ class PropertyController extends Controller
     public function favoritos()
     {
         $favIds = explode(',', request()->cookie('favorites', ''));
-        dd(request()->cookie());
+        // dd(request()->cookie());
 
         $favorites = Property::whereIn('id', $favIds)->get();
 
