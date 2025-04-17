@@ -77,7 +77,7 @@
     </style>
 @endsection
 
-@section('content')
+@section(section: 'content')
     <div class="container py-5">
         <div class="row">
             {{-- Galería de imágenes --}}
@@ -86,7 +86,8 @@
                     $mainImage = $property->thumbnail ?? $property->image;
                 @endphp
 
-                <a href="{{ asset('storage/' . $mainImage) }}" class="glightbox position-relative d-block overflow-hidden"
+                <a href="{{ asset('storage/' . $mainImage) }}"
+                    class="glightbox position-relative d-block overflow-hidden"
                     data-gallery="property-gallery" style="aspect-ratio: 4/3;">
                     <img id="mainImage" src="{{ asset('storage/' . $mainImage) }}" class="w-100 h-100 rounded"
                         style="object-fit: cover;" alt="{{ $property->title }}">
@@ -109,7 +110,7 @@
                                         data-gallery="property-gallery">
                                         <img src="{{ asset("storage/{$img->path}") }}" class="w-100 border rounded"
                                             style="aspect-ratio: 1/1; object-fit: cover;"
-                                            alt="Miniatura {{ $index + 1 }}">
+                                            alt="{{ __('propertyShow.thumbnail') }} {{ $index + 1 }}">
                                     </a>
                                 </div>
                             @endforeach
@@ -120,76 +121,75 @@
                         <i class="bi bi-chevron-right"></i>
                     </button>
                 </div>
-
             </div>
 
             {{-- Info rápida --}}
             <div class="col-lg-4">
                 <div class="border rounded p-4 shadow-sm mb-4">
                     <h5 class="mb-2">{{ $property->title }}</h5>
-                    <p class="text-muted small mb-1"><i class="fas fa-map-marker-alt me-1"></i>{{ $property->zona->nombre }}
+                    <p class="text-muted small mb-1">
+                        <i class="fas fa-map-marker-alt me-1"></i>{{ $property->zona->nombre }}
                     </p>
-                    <p class="text-muted small mb-3">Ref: <strong>{{ $property->ref }}</strong></p>
-                    <h4 class="text-primary"><i
-                            class="fas fa-euro-sign me-1"></i>{{ number_format($property->price, 0, ',', '.') }}</h4>
+                    <p class="text-muted small mb-3">{{ __('propertyShow.ref') }}: <strong>{{ $property->ref }}</strong></p>
+                    <h4 class="text-primary">
+                        <i class="fas fa-euro-sign me-1"></i>{{ number_format($property->price, 0, ',', '.') }}
+                    </h4>
                     <hr>
                     {{-- Iconitos --}}
                     <div class="d-flex flex-wrap gap-4 justify-content-between text-center small">
                         <div><i class="fas fa-home me-1"></i>{{ ucfirst($property->tipo ?? '-') }}</div>
-                        <div><i class="fas fa-bed me-1"></i>{{ $property->bedrooms }} hab</div>
-                        <div><i class="fas fa-bath me-1"></i>{{ $property->bathrooms }} baños</div>
-                        <div><i
-                                class="fas fa-ruler-combined me-1"></i>{{ number_format($property->area / 100, 2, ',', '.') }}
-                            m²
-                        </div>
+                        <div><i class="fas fa-bed me-1"></i>{{ $property->bedrooms }} {{ __('propertyShow.bedrooms') }}</div>
+                        <div><i class="fas fa-bath me-1"></i>{{ $property->bathrooms }} {{ __('propertyShow.bathrooms') }}</div>
+                        <div><i class="fas fa-ruler-combined me-1"></i>{{ number_format($property->area / 100, 2, ',', '.') }} m²</div>
                         @if ($property->tiene_solar)
-                            <div><i
-                                    class="fas fa-border-none me-1"></i>{{ number_format($property->metros_solar / 100, 2, ',', '.') }}
-                                m² solarium</div>
+                            <div><i class="fas fa-border-none me-1"></i>{{ number_format($property->metros_solar / 100, 2, ',', '.') }} m² {{ __('propertyShow.solarium') }}</div>
                         @endif
                         @if ($property->tiene_patio)
-                            <div><i class="fas fa-tree me-1"></i>Jardín</div>
+                            <div><i class="fas fa-tree me-1"></i>{{ __('propertyShow.garden') }}</div>
                         @endif
                         @if ($property->tiene_piscina)
-                            <div><i class="fas fa-water me-1"></i>Piscina</div>
+                            <div><i class="fas fa-water me-1"></i>{{ __('propertyShow.pool') }}</div>
                         @endif
                     </div>
                 </div>
 
                 {{-- Formulario --}}
                 <div class="border rounded p-4 shadow-sm mb-4" id="formulario">
-                    <h5 class="mb-4">Solicita información</h5>
+                    <h5 class="mb-4">{{ __('propertyShow.request_info') }}</h5>
                     <form action="#" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label">Tu nombre completo *</label>
-                            <input type="text" name="name" class="form-control" placeholder="p.ej: María">
+                            <label class="form-label">{{ __('propertyShow.full_name') }} *</label>
+                            <input type="text" name="name" class="form-control" placeholder="{{ __('propertyShow.example_name') }}">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Tu email *</label>
-                            <input type="email" name="email" class="form-control" placeholder="p.ej: nombre@email.com">
+                            <label class="form-label">{{ __('propertyShow.email') }} *</label>
+                            <input type="email" name="email" class="form-control" placeholder="{{ __('propertyShow.example_email') }}">
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Tu teléfono *</label>
+                            <label class="form-label">{{ __('propertyShow.phone') }} *</label>
                             <input type="tel" name="phone" class="form-control" placeholder="+34">
                         </div>
                         <button type="submit" class="btn btn-dark w-100 py-2 fs-5">
-                            <i class="bi bi-send me-2"></i>Enviar solicitud
+                            <i class="bi bi-send me-2"></i>{{ __('propertyShow.send_request') }}
                         </button>
                     </form>
                 </div>
             </div>
-
         </div>
 
         {{-- Descripción --}}
         <div class="mt-5">
-            <h5 class="fw-semibold">Descripción</h5>
-            <p style="white-space: pre-line;">{{ $property->description }}</p>
+            <h5 class="fw-semibold">{{ __('propertyShow.description') }}</h5>
+            @php
+                $lang = app()->getLocale();
+                $descKey = 'description_' . $lang;
+                $description = $property->$descKey ?? $property->description;
+            @endphp
+            <p style="white-space: pre-line;">{{ $description }}</p>
         </div>
-
-
     </div>
+
 @endsection
 
 @section('scripts')

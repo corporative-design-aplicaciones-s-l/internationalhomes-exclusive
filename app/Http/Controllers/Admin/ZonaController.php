@@ -40,6 +40,8 @@ class ZonaController extends Controller
 
         $zona->save();
 
+
+
         // Guardar secciones
         if ($request->has('secciones')) {
             foreach ($request->secciones as $seccion) {

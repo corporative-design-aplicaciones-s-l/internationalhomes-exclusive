@@ -23,6 +23,7 @@ return array(
     'App\\Http\\Controllers\\ContactController' => $baseDir . '/app/Http/Controllers/ContactController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\EnvironmentController' => $baseDir . '/app/Http/Controllers/EnvironmentController.php',
+    'App\\Http\\Controllers\\FavoriteController' => $baseDir . '/app/Http/Controllers/FavoriteController.php',
     'App\\Http\\Controllers\\Front\\HomeController' => $baseDir . '/app/Http/Controllers/Front/HomeController.php',
     'App\\Http\\Controllers\\Front\\PropertyController' => $baseDir . '/app/Http/Controllers/Front/PropertyController.php',
     'App\\Http\\Controllers\\Front\\SearchController' => $baseDir . '/app/Http/Controllers/Front/SearchController.php',

@@ -1,8 +1,9 @@
 import './bootstrap';
 import 'bootstrap';
+import 'trix'
+
 
 import Alpine from 'alpinejs';
-import GLightbox from 'glightbox';
 import 'glightbox/dist/css/glightbox.css';
 
 import L from 'leaflet';

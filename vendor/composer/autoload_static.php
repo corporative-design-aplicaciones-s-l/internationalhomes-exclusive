@@ -562,6 +562,7 @@ class ComposerStaticInitb6e9310d4066ae77c7fd85e5b30eb8fe
         'App\\Http\\Controllers\\ContactController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContactController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\EnvironmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/EnvironmentController.php',
+        'App\\Http\\Controllers\\FavoriteController' => __DIR__ . '/../..' . '/app/Http/Controllers/FavoriteController.php',
         'App\\Http\\Controllers\\Front\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/HomeController.php',
         'App\\Http\\Controllers\\Front\\PropertyController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/PropertyController.php',
         'App\\Http\\Controllers\\Front\\SearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/Front/SearchController.php',

@@ -1,4 +1,5 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'trix/dist/trix.css';
 .btn-main {
     background-color: #1d1d1f;
     color: white;
