@@ -211,7 +211,7 @@
 
                 <li class="nav-item">
                     <!-- Enlace de Logout -->
-                    <form action="{{ route('logout') }}" method="POST" id="logout-form" class="d-inline">
+                    <form action="{{ route('logout', ['locale' => app()->getLocale()]) }}" method="POST" id="logout-form" class="d-inline">
                         @csrf
                         <button type="submit" class="nav-link">
                             <i class="fas fa-sign-out-alt"></i> Cerrar Sesión

@@ -24,7 +24,7 @@
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
 
-                        <form action="{{ route('login') }}" method="POST">
+                        <form action="{{ route('login', ['locale' => app()->getLocale()]) }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Correo electrónico</label>
@@ -45,7 +45,7 @@
                         </form>
 
                         <div class="text-center mt-4">
-                            <a href="{{ route('password.request') }}" class="text-muted">¿Olvidaste tu contraseña?</a>
+                            <a href="{{ route('password.request', ['locale' => app()->getLocale()]) }}" class="text-muted">¿Olvidaste tu contraseña?</a>
                         </div>
                     </div>
                 </div>
