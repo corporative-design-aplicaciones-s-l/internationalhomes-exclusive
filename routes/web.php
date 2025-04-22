@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PropertyImageController;
-use App\Http\Controllers\Admin\SubzoneController as AdminSubzone;
+use App\Http\Controllers\Admin\SubzoneController;
 use App\Http\Controllers\Admin\ZonaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
@@ -67,7 +67,7 @@ Route::group(['prefix' => '{locale}', 'middleware' => 'setlocale'], function () 
 
 // 🔐 Rutas de administrador
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
-    Route::resource('subzonas', AdminSubzone::class)->names('subzonas');
+    Route::resource('subzonas', SubzoneController::class)->names('subzonas');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::resource('properties', AdminPropertyController::class);
     Route::patch('properties/{property}/images/{image}/set-thumbnail', [PropertyImageController::class, 'setThumbnail'])->name('properties.images.set-thumbnail');
@@ -76,6 +76,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::resource('users', UserController::class);
     Route::get('reports', [ReportController::class, 'index'])->name('reports');
     Route::get('settings', [SettingsController::class, 'index'])->name('settings');
+    Route::resource('subzonas', SubzoneController::class)->names('subzonas');
+
 });
 
 // 👤 Perfil de usuario
