@@ -184,7 +184,7 @@
                                             href="{{ route('admin.zonas.index') }}">Zonas</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link"
-                                            href="{{ route('admin.subzonas.index') }}">Zonas</a>
+                                            href="{{ route('admin.subzonas.index') }}">Subzonas</a>
                                     </li>
                                     <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
                                 </ul>
