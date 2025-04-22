@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Str;
 
 class Property extends Model
@@ -39,10 +40,17 @@ class Property extends Model
         return $this->belongsTo(Subzona::class);
     }
 
-    public function zona()
-    {
-        return $this->subzona?->zona;
-    }
+    public function zona(): HasOneThrough
+{
+    return $this->hasOneThrough(
+        \App\Models\Zona::class,
+        \App\Models\Subzona::class,
+        'id',          // Foreign key on subzonas table
+        'id',          // Foreign key on zonas table
+        'subzona_id',  // Local key on properties table
+        'zona_id'      // Local key on subzonas table
+    );
+}
 
     public function propietario()
     {
