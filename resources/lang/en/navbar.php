@@ -2,7 +2,8 @@
 
 return [
     'home' => 'Home',
-    'properties' => 'Properties',
+    'properties' => 'Promotions',
+    'all_properties' => 'All Properties',
     'environment' => 'Environment',
     'contact' => 'Contact',
     'favorites' => 'Favorites',

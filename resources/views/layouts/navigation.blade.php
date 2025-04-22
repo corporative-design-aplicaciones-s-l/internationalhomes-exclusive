@@ -15,9 +15,25 @@
                     <a class="nav-link"
                         href="{{ url('/', ['locale' => app()->getLocale()]) }}">{{ __('navbar.home') }}</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link"
-                        href="{{ route('guest.properties.index', ['locale' => app()->getLocale()]) }}">{{ __('navbar.properties') }}</a>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        {{ __('navbar.properties') }}
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('guest.properties.index', ['locale' => app()->getLocale()]) }}">
+                                {{ __('navbar.all_properties') }}
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        @foreach ($zonas as $zona)
+                            <li>
+                                <a class="dropdown-item" href="{{ route('zonas.show', ['locale' => app()->getLocale(), 'slug' => $zona->slug]) }}">
+                                    {{ $zona->nombre }}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link"

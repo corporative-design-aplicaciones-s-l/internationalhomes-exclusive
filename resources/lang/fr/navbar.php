@@ -2,7 +2,8 @@
 
 return [
     'home' => 'Accueil',
-    'properties' => 'Propriétés',
+    'properties' => 'Promotions',
+    'all_properties' => 'Toutes les propriétés',
     'environment' => 'Environnement',
     'contact' => 'Contact',
     'favorites' => 'Favoris',

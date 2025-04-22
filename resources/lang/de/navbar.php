@@ -2,7 +2,8 @@
 
 return [
     'home' => 'Startseite',
-    'properties' => 'Immobilien',
+    'properties' => 'Aktionen',
+    'all_properties' => 'Alle Immobilien',
     'environment' => 'Umgebung',
     'contact' => 'Kontakt',
     'favorites' => 'Favoriten',
