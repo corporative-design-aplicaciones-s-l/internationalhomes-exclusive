@@ -27,6 +27,11 @@ class Zona extends Model
         return $this->hasMany(ZonaSection::class);
     }
 
+    public function subzonas()
+    {
+        return $this->hasMany(Subzona::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

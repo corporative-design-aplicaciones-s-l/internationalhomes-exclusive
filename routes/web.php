@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PropertyImageController;
+use App\Http\Controllers\Admin\SubzoneController as AdminSubzone;
 use App\Http\Controllers\Admin\ZonaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\EnvironmentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\PropertyController;
+use App\Http\Controllers\Front\SubzonaController;
 use App\Http\Controllers\PropertyController as AdminPropertyController;
 use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\ProfileController;
@@ -59,10 +61,13 @@ Route::group(['prefix' => '{locale}', 'middleware' => 'setlocale'], function () 
     // Entorno y zonas
     Route::get('/entorno', [EnvironmentController::class, 'index'])->name('environment');
     Route::get('/entorno/{slug}', [EnvironmentController::class, 'show'])->name('zonas.show');
+    Route::get('/subzona/{slug}', [SubzonaController::class, 'show'])->name('subzonas.show');
+
 })->where(['locale' => 'es|en|fr|de']);
 
 // 🔐 Rutas de administrador
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
+    Route::resource('subzonas', AdminSubzone::class)->names('subzonas');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::resource('properties', AdminPropertyController::class);
     Route::patch('properties/{property}/images/{image}/set-thumbnail', [PropertyImageController::class, 'setThumbnail'])->name('properties.images.set-thumbnail');

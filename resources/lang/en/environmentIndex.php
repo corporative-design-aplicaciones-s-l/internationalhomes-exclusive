@@ -7,5 +7,5 @@ return [
     'paragraph_2' => 'Here you will enjoy a safe and peaceful environment, with modern properties such as <strong>apartments, villas, and bungalows</strong>, designed for year-round living or extended stays. Terraces, solariums, gardens, and pools make the resort ideal for well-being.',
     'paragraph_3' => 'In addition to the natural surroundings, the <strong>Alhama Signature golf course</strong>, designed by Jack Nicklaus, stands out, along with services such as the <strong>Al Kasar shopping center</strong>, supermarkets, sports areas, and restaurants. Everything you need, in a place committed to growth and quality of life.',
     'map_title' => 'Area map',
-    'zones_title' => 'The zones',
+    'zones_title' => 'The Promotions',
 ];

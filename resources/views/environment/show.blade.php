@@ -43,6 +43,32 @@
         @endforeach
     </section>
 
+    <!-- Subzonas dentro de la zona -->
+    @if ($zona->subzonas->count())
+        <section class="container py-5">
+            <h2 class="mb-4">Modelos en {{ $zona->nombre }}</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach ($zona->subzonas as $subzona)
+                    <div class="col">
+                        <div class="card h-100 shadow-sm border-0">
+                            @if ($subzona->imagen_destacada)
+                                <img src="{{ asset('storage/' . $subzona->imagen_destacada) }}" class="card-img-top"
+                                    alt="{{ $subzona->titulo }}" style="aspect-ratio: 4/3; object-fit: cover;">
+                            @endif
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ $subzona->titulo }}</h5>
+                                <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($subzona->descripcion), 100) }}
+                                </p>
+                                <a href="{{ route('subzonas.show', ['locale' => app()->getLocale(), 'slug' => $subzona->slug]) }}"
+                                    class="btn btn-outline-dark mt-2 w-100">Ver modelo</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
     <!-- Propiedades dentro de la zona -->
     @if ($zona->properties->count())
         <section class="container py-5">
@@ -56,7 +82,8 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $property->title }}</h5>
                                 <p class="card-text">{{ Str::limit($property->description, 100) }}</p>
-                                <a href="{{ route('guest.property.show',['locale' => app()->getLocale(), $property->slug] ) }}" class="btn btn-dark">Ver
+                                <a href="{{ route('guest.property.show', ['locale' => app()->getLocale(), $property->slug]) }}"
+                                    class="btn btn-dark">Ver
                                     más</a>
                             </div>
                         </div>

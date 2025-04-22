@@ -34,9 +34,14 @@ class Property extends Model
         'tiene_piscina',
     ];
 
+    public function subzona()
+    {
+        return $this->belongsTo(Subzona::class);
+    }
+
     public function zona()
     {
-        return $this->belongsTo(Zona::class);
+        return $this->subzona?->zona;
     }
 
     public function propietario()
