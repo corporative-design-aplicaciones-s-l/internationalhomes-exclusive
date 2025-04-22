@@ -5,7 +5,7 @@
                 <small class="text-uppercase text-muted">{{ __('home.featured_properties') }}</small>
                 <h2 class="fw-light mt-2">{{ __('home.dream_title') }}</h2>
             </div>
-            <a href="{{ route('guest.properties.index') }}" class="text-decoration-none text-dark fw-semibold text-uppercase small">
+            <a href="{{ route('guest.properties.index', ['locale' => app()->getLocale()]) }}" class="text-decoration-none text-dark fw-semibold text-uppercase small">
                 {{ __('home.view_all') }} <i class="fas fa-chevron-right ms-1"></i>
             </a>
         </div>
@@ -15,7 +15,7 @@
                 @foreach ($featured as $property)
                     <div class="swiper-slide fade-in-up">
                         <div class="bg-white rounded-4 shadow-sm overflow-hidden position-relative p-3">
-                            <a href="{{ route('guest.property.show', $property->slug) }}">
+                            <a href="{{ route('guest.property.show', ['locale' => app()->getLocale(), $property->slug]) }}">
                                 <img src="{{ asset('storage/' . $property->thumbnail) }}" class="w-100 rounded-3 mb-3" style="aspect-ratio: 4/3; object-fit: cover;" alt="{{ $property->title }}">
                             </a>
                             <div class="mb-2 d-flex gap-2">

@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
+use App\Models\Property;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,18 +28,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {
+    if (env('APP_UNDER_CONSTRUCTION', false)) {
+        return view('under-construction');
+    }
 
+    return redirect()->route('welcome.access');
+});
+
+Route::get('/puerta-trasera', function () {
+    $featured = Property::where('is_featured', true)->get();
+
+    return view('welcome', compact('featured'));
+})->name('welcome.access');
 
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-
-// IDIOMAS
-Route::get('/lang/{locale}', function ($locale) {
-    if (in_array($locale, ['es', 'en', 'fr', 'de'])) {
-        session(['locale' => $locale]);
-    }
-    return redirect()->back();
-})->name('lang.switch');
 
 
 Route::middleware('auth')->group(function () {
@@ -47,26 +51,33 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// SEARCH
-Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 
-// PROPERTIES
-Route::get('/propiedad/{slug}', [PropertyController::class, 'show'])->name('guest.property.show');
-Route::get('/propiedades', [PropertyController::class, 'index'])->name('guest.properties.index');
-Route::get('/favoritos', [PropertyController::class, 'favoritos'])->name('guest.properties.favorites');
-Route::post('/toggle-favorite', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
+Route::group(['prefix' => '{locale}', 'middleware' => 'setlocale'], function () {
+    //HOME
+    Route::get('/', action: [HomeController::class, 'index']);
 
 
-// ABOUT
-Route::get('/nosotros', fn() => view('about.index'))->name('about');
+    // SEARCH
+    Route::get('/buscar', [SearchController::class, 'index'])->name('search');
 
-// ENVIROMENT
-Route::get('/entorno', [EnvironmentController::class, 'index'])->name('environment');
-Route::get('/entorno/{slug}', [EnvironmentController::class, 'show'])->name('zonas.show');
+    // PROPERTIES
+    Route::get('/propiedad/{slug}', [PropertyController::class, 'show'])->name('guest.property.show');
+    Route::get('/propiedades', [PropertyController::class, 'index'])->name('guest.properties.index');
+    Route::get('/favoritos', [PropertyController::class, 'favoritos'])->name('guest.properties.favorites');
+    Route::post('/toggle-favorite', [FavoriteController::class, 'toggle'])->name('favorites.toggle');
 
-// CONTACT
-Route::get('/contact', fn() => view('contact.index'))->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+    // ABOUT
+    Route::get('/nosotros', fn() => view('about.index'))->name('about');
+
+    // ENVIROMENT
+    Route::get('/entorno', [EnvironmentController::class, 'index'])->name('environment');
+    Route::get('/entorno/{slug}', [EnvironmentController::class, 'show'])->name('zonas.show');
+
+    // CONTACT
+    Route::get('/contact', fn() => view('contact.index'))->name('contact');
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+});
 
 // ADMIN
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
@@ -96,5 +107,8 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
     Route::get('settings', [SettingsController::class, 'index'])->name('settings');
 });
 
+Route::get('/test-slug/{slug}', function ($slug) {
+    return App\Models\Property::where('slug', $slug)->firstOrFail();
+});
 
 require __DIR__ . '/auth.php';

@@ -108,7 +108,7 @@
                 <div class="col-lg-7" data-aos="fade-left">
                     <div class="contact-card">
                         <h4 class="mb-4">Envíanos tu mensaje</h4>
-                        <form action="{{ route('contact.store') }}" method="POST">
+                        <form action="{{ route('contact.store', ['locale' => app()->getLocale()]) }}" method="POST">
                             @csrf
 
                             <div class="mb-3">

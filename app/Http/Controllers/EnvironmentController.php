@@ -15,7 +15,7 @@ class EnvironmentController extends Controller
         return view('environment.index', compact('zonas'));
     }
 
-    public function show($slug)
+    public function show($locale, $slug)
     {
         $zona = Zona::whereRaw('LOWER(slug) = ?', [Str::slug($slug)])
         ->with(['secciones', 'properties'])

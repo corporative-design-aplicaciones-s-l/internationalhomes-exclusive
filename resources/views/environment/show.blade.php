@@ -56,7 +56,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ $property->title }}</h5>
                                 <p class="card-text">{{ Str::limit($property->description, 100) }}</p>
-                                <a href="{{ route('guest.property.show', $property->slug) }}" class="btn btn-dark">Ver
+                                <a href="{{ route('guest.property.show',['locale' => app()->getLocale(), $property->slug] ) }}" class="btn btn-dark">Ver
                                     más</a>
                             </div>
                         </div>

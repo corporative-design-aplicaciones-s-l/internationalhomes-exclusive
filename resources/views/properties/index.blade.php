@@ -214,7 +214,7 @@
 
     {{-- Favoritas --}}
     <section class="text-center my-5">
-        <a href="{{ route('guest.properties.favorites') }}" class="btn btn-dark px-5 py-3">
+        <a href="{{ route('guest.properties.favorites', ['locale' => app()->getLocale()]) }}" class="btn btn-dark px-5 py-3">
             <i class="bi bi-heart-fill me-2"></i> {{ __('propertyIndex.view_favorites') }}
         </a>
     </section>

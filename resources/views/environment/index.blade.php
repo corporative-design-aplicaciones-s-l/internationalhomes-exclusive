@@ -346,7 +346,7 @@
                                     {{ $zona->nombre }}
                                 </h4>
                             </div>
-                            <a href="{{ route('zonas.show', ['slug' => $zona->slug]) }}" class="stretched-link"></a>
+                            <a href="{{ route('zonas.show', ['locale' => app()->getLocale(), 'slug'=>$zona->slug]) }}" class="stretched-link"></a>
                         </div>
                     </div>
                 @endforeach

@@ -79,7 +79,7 @@ class PropertyController extends Controller
         return view('properties.index', compact('properties', 'recentProperties', 'favProperties'));
     }
 
-    public function show($slug)
+    public function show($locale, $slug)
     {
         $property = Property::where('slug', $slug)->with('images')->firstOrFail();
         $recent = json_decode(request()->cookie('recent_properties', '[]'), true);

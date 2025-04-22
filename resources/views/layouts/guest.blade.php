@@ -112,9 +112,9 @@
                     <h6 class="text-uppercase small fw-bold mb-3">{{ __('menu.menu') }}</h6>
                     <ul class="list-unstyled small">
                         <li><a href="{{ url('/') }}" class="text-white text-decoration-none">{{ __('menu.home') }}</a></li>
-                        <li><a href="{{ route('guest.properties.index') }}" class="text-white text-decoration-none">{{ __('menu.properties') }}</a></li>
-                        <li><a href="{{ route('environment') }}" class="text-white text-decoration-none">{{ __('menu.environment') }}</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-white text-decoration-none">{{ __('menu.contact') }}</a></li>
+                        <li><a href="{{ route('guest.properties.index', ['locale' => app()->getLocale()]) }}" class="text-white text-decoration-none">{{ __('menu.properties') }}</a></li>
+                        <li><a href="{{ route('environment', ['locale' => app()->getLocale()]) }}" class="text-white text-decoration-none">{{ __('menu.environment') }}</a></li>
+                        <li><a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="text-white text-decoration-none">{{ __('menu.contact') }}</a></li>
                     </ul>
                 </div>
 

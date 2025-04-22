@@ -2,8 +2,8 @@
     <div class="row g-0">
         {{-- Imagen --}}
         <div class="col-md-4">
-            <a href="{{ route('guest.property.show', $property->slug) }}">
-                <img src="{{ "storage/{$property->thumbnail}" }}" alt="{{ $property->title }}"
+            <a href="{{ route('guest.property.show', ['locale' => app()->getLocale(), $property->slug])}}">
+                <img src="{{ asset('storage/' . $property->thumbnail) }}" alt="{{ $property->title }}"
                     class="w-100 h-100" style="object-fit: cover; aspect-ratio: 4/3;">
             </a>
         </div>
@@ -15,7 +15,7 @@
                     {{ $property->location ?? 'Ubicación desconocida' }}
                 </p>
                 <h5 class="mb-2">
-                    <a href="{{ route('guest.property.show', $property->slug) }}"
+                    <a href="{{ route('guest.property.show', ['locale' => app()->getLocale(), $property->slug]) }}"
                         class="text-decoration-none text-dark">
                         {{ $property->title }}
                     </a>

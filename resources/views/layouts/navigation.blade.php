@@ -12,38 +12,51 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav gap-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/') }}">{{ __('navbar.home') }}</a>
+                    <a class="nav-link"
+                        href="{{ url('/', ['locale' => app()->getLocale()]) }}">{{ __('navbar.home') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guest.properties.index') }}">{{ __('navbar.properties') }}</a>
+                    <a class="nav-link"
+                        href="{{ route('guest.properties.index', ['locale' => app()->getLocale()]) }}">{{ __('navbar.properties') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('environment') }}">{{ __('navbar.environment') }}</a>
+                    <a class="nav-link"
+                        href="{{ route('environment', ['locale' => app()->getLocale()]) }}">{{ __('navbar.environment') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contact') }}">{{ __('navbar.contact') }}</a>
+                    <a class="nav-link"
+                        href="{{ route('contact', ['locale' => app()->getLocale()]) }}">{{ __('navbar.contact') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('guest.properties.favorites') }}">
+                    <a class="nav-link"
+                        href="{{ route('guest.properties.favorites', ['locale' => app()->getLocale()]) }}">
                         <i class="bi bi-heart-fill me-1"></i> {{ __('navbar.favorites') }}
                     </a>
                 </li>
 
                 {{-- Selector de idioma --}}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown">
-                        🌐 {{ strtoupper(app()->getLocale()) }}
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langDropdown">
-                        @foreach (['es' => 'ES', 'en' => 'EN', 'fr' => 'FR', 'de' => 'DE'] as $lang => $label)
+                <div class="dropdown">
+                    @php
+                        function localized_url($locale)
+                        {
+                            $segments = request()->segments();
+                            $segments[0] = $locale;
+                            return url(implode('/', $segments));
+                        }
+                    @endphp
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        {{ strtoupper(app()->getLocale()) }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        @foreach (['es', 'en', 'fr', 'de'] as $lang)
                             <li>
-                                <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}">
-                                    {{ $label }}
+                                <a class="dropdown-item" href="{{ localized_url($lang) }}">
+                                    {{ strtoupper($lang) }}
                                 </a>
                             </li>
                         @endforeach
                     </ul>
-                </li>
+                </div>
             </ul>
         </div>
     </div>

@@ -9,7 +9,7 @@
                         <p class="lead">{{ __('home.in_condado') }}</p>
 
                         {{-- Buscador --}}
-                        <form action="{{ route('search') }}" method="GET" class="row g-2 mt-4 bg-white p-3 rounded shadow text-dark">
+                        <form action="{{ route('search', ['locale' => app()->getLocale()]) }}" method="GET" class="row g-2 mt-4 bg-white p-3 rounded shadow text-dark">
                             <div class="col-md-3">
                                 <select name="type" class="form-select">
                                     <option value="">{{ __('home.location') }}</option>
@@ -35,12 +35,12 @@
                             <div class="col-md-2">
                                 <button type="submit" class="btn btn-dark w-100">
                                     <i class="fas fa-search me-2"></i>
-                                    <span class="d-none d-md-inline">{{ __('home.search') }}</span>
+                                    <span class="d-none d-md-inline">{{ __('home.search', ['locale' => app()->getLocale()]) }}</span>
                                 </button>
                             </div>
                         </form>
 
-                        <a href="{{ route('contact') }}" class="btn btn-outline-light mt-3">
+                        <a href="{{ route('contact', ['locale' => app()->getLocale()]) }}" class="btn btn-outline-light mt-3">
                             {{ __('home.have_questions') }}
                         </a>
                     </div>
