@@ -14,7 +14,7 @@ class Subzona extends Model
         return $this->belongsTo(Zona::class);
     }
 
-    public function propiedades()
+    public function properties()
     {
         return $this->hasMany(Property::class);
     }
