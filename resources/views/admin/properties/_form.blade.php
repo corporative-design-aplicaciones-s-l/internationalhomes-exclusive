@@ -23,18 +23,18 @@
         <input type="text" name="tipo" class="form-control" value="{{ old('tipo', $property->tipo ?? '') }}">
     </div>
 
-    <div class="mb-3 col-md-6">
-        <label class="form-label">Zona</label>
-        <select name="zona_id" class="form-select">
-            <option value="">-- Selecciona una zona --</option>
-            @foreach ($zonas as $zona)
-                <option value="{{ $zona->id }}"
-                    {{ old('zona_id', $property->zona_id ?? '') == $zona->id ? 'selected' : '' }}>
-                    {{ $zona->nombre }}
-                </option>
-            @endforeach
-        </select>
-    </div>
+    <div class="mb-3">
+    <label class="form-label">Subzona</label>
+    <select name="subzona_id" class="form-select" required>
+        <option value="">Selecciona una subzona</option>
+        @foreach($subzonas as $subzona)
+            <option value="{{ $subzona->id }}"
+                @selected(isset($property) && $property->subzona_id == $subzona->id)>
+                {{ $subzona->zona->nombre }} – {{ $subzona->nombre }}
+            </option>
+        @endforeach
+    </select>
+</div>
 
     <div class="mb-3 col-md-6">
         <label class="form-label">Propietario</label>
