@@ -71,7 +71,7 @@ class PropertyController extends Controller
             'location' => $request->location,
             'price' => $request->price,
             'tipo' => $request->tipo,
-            'sub' => $request->subzona_id,
+            'subzona_id' => $request->subzona_id,
             'description' => $request->description,
             'description_en' => $request->description_en,
             'description_fr' => $request->description_fr,
