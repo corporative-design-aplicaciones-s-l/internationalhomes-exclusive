@@ -14,6 +14,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('subzonas', function (Blueprint $table) {
+            $table->string('estado')->nullable();
             $table->string('fecha_entrega')->nullable()->after('estado'); // o una fecha real si prefieres Date
             $table->text('ventajas')->nullable()->after('fecha_entrega'); // beneficios tipo lista
             $table->text('equipamiento')->nullable()->after('ventajas');  // ej: cocina equipada, A/C, etc.
