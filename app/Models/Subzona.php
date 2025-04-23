@@ -7,7 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subzona extends Model
 {
-    protected $fillable = ['zona_id', 'nombre', 'slug', 'contenido_html'];
+    protected $fillable = [
+        'zona_id',
+        'nombre',
+        'slug',
+        'contenido_html',
+        'fecha_entrega',
+        'ventajas',
+        'equipamiento',
+        'plano',
+        'pdf_info_comercial',
+    ];
 
     public function zona()
     {

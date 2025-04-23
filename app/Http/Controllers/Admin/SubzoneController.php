@@ -24,24 +24,58 @@ class SubzoneController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $request->validate([
             'nombre' => 'required|string|max:255',
-            'slug' => 'required|string|unique:subzonas',
+            'slug' => 'nullable|string|max:255',
             'zona_id' => 'required|exists:zonas,id',
+            'imagen_destacada' => 'nullable|image|max:5120',
+            'resumen' => 'nullable|string|max:500',
             'descripcion' => 'nullable|string',
-            'imagen_principal' => 'nullable|image',
+            'habitaciones' => 'nullable|integer',
+            'banos' => 'nullable|integer',
+            'superficie' => 'nullable|numeric',
+            'precio_desde' => 'nullable|numeric',
+            'estado' => 'nullable|string|max:100',
+            'imagenes.*' => 'nullable|image|max:5120',
         ]);
 
-        if ($request->hasFile('imagen_principal')) {
-            $data['imagen_principal'] = $request->file('imagen_principal')->store('subzonas', 'public');
+        // Slug automático si no viene
+        $slug = $request->slug ?: Str::slug($request->nombre);
+        $baseSlug = $slug;
+        $count = 2;
+
+        while (Subzona::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . $count++;
         }
 
-        $subzona = Subzona::create($data);
+        // Crear la subzona
+        $subzona = new Subzona();
+        $subzona->zona_id = $request->zona_id;
+        $subzona->nombre = $request->nombre;
+        $subzona->slug = $slug;
+        $subzona->resumen = $request->resumen;
+        $subzona->descripcion = $request->descripcion;
+        $subzona->habitaciones = $request->habitaciones;
+        $subzona->banos = $request->banos;
+        $subzona->superficie = $request->superficie;
+        $subzona->precio_desde = $request->precio_desde;
+        $subzona->estado = $request->estado;
 
+        // Imagen destacada
+        if ($request->hasFile('imagen_destacada')) {
+            $path = $request->file('imagen_destacada')->store('subzonas', 'public');
+            $subzona->imagen_destacada = $path;
+        }
+
+        $subzona->save();
+
+        // Galería
         if ($request->hasFile('imagenes')) {
-            foreach ($request->file('imagenes') as $img) {
-                $subzona->imagenes()->create([
-                    'path' => $img->store('subzonas', 'public'),
+            foreach ($request->file('imagenes') as $file) {
+                $path = $file->store('subzonas', 'public');
+                SubzonaImagen::create([
+                    'subzona_id' => $subzona->id,
+                    'path' => $path,
                 ]);
             }
         }
