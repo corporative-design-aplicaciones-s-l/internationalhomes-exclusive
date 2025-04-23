@@ -52,7 +52,7 @@ class Property extends Model
     //     );
     // }
 
-    public function getZonaAttribute()
+    public function zona()
     {
         return $this->subzona?->zona;
     }

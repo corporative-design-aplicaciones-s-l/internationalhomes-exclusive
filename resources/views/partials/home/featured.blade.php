@@ -34,7 +34,7 @@
                                 <div><i class="fas fa-bath d-block mb-1"></i>{{ $property->bathrooms ?? '-' }}</div>
                                 <div><i class="fas fa-warehouse d-block mb-1"></i>{{ $property->tipo ?? '-' }}</div>
                             </div>
-                            <h6 class="fw-bold text-uppercase mb-0 text-black">{{ Str::upper(Str::limit($property->subzona->zona->nombre, 20)) }}</h6>
+                            <h6 class="fw-bold text-uppercase mb-0 text-black">{{ Str::upper(Str::limit($property->zona->nombre, 20)) }}</h6>
                             <div class="text-muted text-capitalize fw-normal">Condado de Alhama</div>
                             <small class="text-uppercase text-muted">{{ ucfirst($property->tipo) }} · {{ __('home.new_build') }}</small>
                             <div class="d-flex justify-content-between align-items-center mt-3">
