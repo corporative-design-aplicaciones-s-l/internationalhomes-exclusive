@@ -13,9 +13,7 @@
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
                 @foreach ($featured as $property)
-                @php
-                dd($property);
-                @endphp
+
                     <div class="swiper-slide fade-in-up">
                         <div class="bg-white rounded-4 shadow-sm overflow-hidden position-relative p-3">
                             <a href="{{ route('guest.property.show', ['locale' => app()->getLocale(), $property->slug]) }}">
