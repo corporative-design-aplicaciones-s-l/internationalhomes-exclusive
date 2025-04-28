@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('banos')->nullable()->after('habitaciones');
             $table->decimal('superficie', 10, 2)->nullable()->after('banos');
             $table->decimal('precio_desde', 12, 2)->nullable()->after('superficie');
-            $table->string('estado', 100)->nullable()->after('precio_desde');
         });
     }
 
@@ -30,7 +29,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('subzonas', function (Blueprint $table) {
-            $table->dropColumn(['habitaciones', 'banos', 'superficie', 'precio_desde', 'estado']);
+            $table->dropColumn(['habitaciones', 'banos', 'superficie', 'precio_desde']);
         });
     }
 };
