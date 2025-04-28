@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Property;
 use App\Models\PropertyImage;
 use App\Models\Propietario;
+use App\Models\Subzona;
 use App\Models\Zona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -33,10 +34,10 @@ class PropertyController extends Controller
 
     public function create()
     {
-        $zonas = Zona::all();
+        $subzonas = Subzona::all();
         $propietarios = Propietario::all();
 
-        return view('admin.properties.create', compact('zonas', 'propietarios'));
+        return view('admin.properties.create', compact('subzonas', 'propietarios'));
     }
 
     public function store(Request $request)
@@ -46,8 +47,7 @@ class PropertyController extends Controller
             'location' => 'nullable|string',
             'price' => 'nullable|numeric',
             'tipo' => 'nullable|string|max:100',
-            'zona_id' => 'nullable|exists:zonas,id',
-            'propietario_id' => 'nullable|exists:propietarios,id',
+            'subzona_id' => 'nullable|exists:subzonas,id',
             'description' => 'nullable|string',
             'description_en' => 'nullable|string',
             'description_fr' => 'nullable|string',
@@ -71,8 +71,7 @@ class PropertyController extends Controller
             'location' => $request->location,
             'price' => $request->price,
             'tipo' => $request->tipo,
-            'zona_id' => $request->zona_id,
-            'propietario_id' => $request->propietario_id,
+            'subzona_id' => $request->subzona_id,
             'description' => $request->description,
             'description_en' => $request->description_en,
             'description_fr' => $request->description_fr,
@@ -125,12 +124,12 @@ class PropertyController extends Controller
 
     public function edit($id)
     {
-        $zonas = Zona::all();
+        $subzonas = Subzona::all();
         $propietarios = Propietario::all();
 
         $property = Property::with('images')->findOrFail($id); // <- AÑADIDO with('images')
 
-        return view('admin.properties.edit', compact('property', 'zonas', 'propietarios'));
+        return view('admin.properties.create', compact('subzonas', 'propietarios'));
     }
 
     public function update(Request $request, $id)
