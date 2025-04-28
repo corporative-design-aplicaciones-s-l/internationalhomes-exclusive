@@ -9,7 +9,7 @@
     </div>
 
     <div class="card shadow-sm">
-        <div class="card-body mb-4" style="max-height: 100vh; overflow-y: auto;">
+        <div class="card-body mb-4" style="max-height: 90vh; overflow-y: auto;">
 
             <form action="{{ route('admin.subzonas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
