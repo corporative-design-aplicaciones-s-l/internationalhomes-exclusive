@@ -9,7 +9,7 @@
     </div>
 
     <div class="card shadow-sm">
-        <div class="card-body mb-4" style="max-height: 90vh; overflow-y: auto;">
+        <div class="card-body mb-4" style="max-height: 80vh; overflow-y: auto;">
 
             <form action="{{ route('admin.subzonas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -103,9 +103,6 @@
                 <div class="text-end my-4">
                     <button type="submit" class="btn btn-main">Guardar Subzona</button>
                 </div>
-                <br/>
-                <br/>
-                <br/>
             </form>
         </div>
     </div>
