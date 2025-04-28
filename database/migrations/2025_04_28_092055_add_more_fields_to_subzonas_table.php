@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('subzonas', function (Blueprint $table) {
-            $table->integer('habitaciones')->nullable()->after('descripcion');
+            $table->integer('habitaciones')->nullable();
             $table->integer('banos')->nullable()->after('habitaciones');
             $table->decimal('superficie', 10, 2)->nullable()->after('banos');
             $table->decimal('precio_desde', 12, 2)->nullable()->after('superficie');
