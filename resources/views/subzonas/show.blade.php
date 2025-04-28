@@ -22,20 +22,6 @@
 <section class="py-5">
     <div class="container">
 
-        {{-- Galería tipo mosaico --}}
-        @if($subzona->imagenes && count($subzona->imagenes))
-            <h2 class="h5 mb-4">Galería de imágenes</h2>
-            <div class="row g-3 mb-5">
-                @foreach($subzona->imagenes as $imagen)
-                    <div class="col-6 col-md-4 col-lg-3">
-                        <a href="{{ asset('storage/' . $imagen->path) }}" class="glightbox" data-gallery="gallery">
-                            <img src="{{ asset('storage/' . $imagen->path) }}" class="img-fluid rounded shadow-sm" alt="Imagen">
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-        @endif
-
         {{-- Características destacadas --}}
         <div class="row mb-5">
             <div class="col-md-6">
@@ -53,16 +39,16 @@
             <div class="col-md-6">
                 {{-- PDFs --}}
                 <div class="mb-3">
-                    @if($subzona->brochure_pdf)
-                        <a href="{{ asset('storage/' . $subzona->brochure_pdf) }}" target="_blank" class="btn btn-outline-dark w-100 mb-2">
-                            <i class="bi bi-file-earmark-text me-2"></i> Descargar Brochure
-                        </a>
-                    @endif
-                    @if($subzona->planos_pdf)
-                        <a href="{{ asset('storage/' . $subzona->planos_pdf) }}" target="_blank" class="btn btn-outline-dark w-100">
-                            <i class="bi bi-map me-2"></i> Ver Planos
-                        </a>
-                    @endif
+                    @if($subzona->pdf_info_comercial)
+                    <a href="{{ asset('storage/' . $subzona->pdf_info_comercial) }}" target="_blank" class="btn btn-outline-dark w-100 mb-2">
+                        <i class="bi bi-file-earmark-text me-2"></i> Descargar Información Comercial
+                    </a>
+                @endif
+                @if($subzona->plano)
+                    <a href="{{ asset('storage/' . $subzona->plano) }}" target="_blank" class="btn btn-outline-dark w-100">
+                        <i class="bi bi-map me-2"></i> Ver Plano
+                    </a>
+                @endif
                 </div>
             </div>
         </div>
@@ -83,11 +69,26 @@
                 </div>
             </div>
         @endif
-
+        <h2 class="h5 mb-4">Detalles de la Promoción</h2>
         {{-- Contenido HTML extendido --}}
         @if($subzona->contenido_html)
             <div class="mb-5">
                 {!! $subzona->contenido_html !!}
+            </div>
+        @endif
+
+        <h2 class="h5 mb-4">Galería de Imágenes</h2>
+        {{-- Galería tipo mosaico --}}
+        @if($subzona->imagenes && count($subzona->imagenes))
+            <h2 class="h5 mb-4">Galería de imágenes</h2>
+            <div class="row g-3 mb-5">
+                @foreach($subzona->imagenes as $imagen)
+                    <div class="col-6 col-md-4 col-lg-3">
+                        <a href="{{ asset('storage/' . $imagen->path) }}" class="glightbox" data-gallery="gallery">
+                            <img src="{{ asset('storage/' . $imagen->path) }}" class="img-fluid rounded shadow-sm" alt="Imagen">
+                        </a>
+                    </div>
+                @endforeach
             </div>
         @endif
 

@@ -61,6 +61,7 @@ class SubzoneController extends Controller
         $subzona->superficie = $request->superficie;
         $subzona->precio_desde = $request->precio_desde;
         $subzona->estado = $request->estado;
+        $subzona->contenido_html = $request->contenido_html;
 
         // Imagen destacada
         if ($request->hasFile('imagen_destacada')) {
@@ -116,6 +117,8 @@ class SubzoneController extends Controller
             'fecha_entrega' => $request->fecha_entrega,
             'ventajas' => $request->ventajas,
             'equipamiento' => $request->equipamiento,
+            'contenido_html' => $request->contenido_html,
+
         ]);
 
         // Imagen destacada

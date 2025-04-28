@@ -11,12 +11,20 @@ class Subzona extends Model
         'zona_id',
         'nombre',
         'slug',
-        'contenido_html',
+        'resumen',
+        'descripcion',
+        'contenido_html', // <-- Añadido
+        'habitaciones',
+        'banos',
+        'superficie',
+        'precio_desde',
+        'estado',
         'fecha_entrega',
         'ventajas',
         'equipamiento',
         'plano',
         'pdf_info_comercial',
+        'imagen_destacada',
     ];
 
     public function zona()

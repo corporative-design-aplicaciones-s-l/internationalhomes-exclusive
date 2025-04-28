@@ -52,6 +52,11 @@
                         <textarea name="descripcion" class="form-control" rows="6">{{ $subzona->descripcion }}</textarea>
                     </div>
 
+                    <div class="col-12">
+                        <label class="form-label">Contenido adicional (HTML enriquecido)</label>
+                        <textarea name="contenido_html" class="form-control" rows="6">{{ old('contenido_html', $subzona->contenido_html) }}</textarea>
+                    </div>
+
                     <div class="col-md-3">
                         <label class="form-label">Habitaciones</label>
                         <input type="number" name="habitaciones" class="form-control" value="{{ $subzona->habitaciones }}">

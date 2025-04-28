@@ -50,6 +50,11 @@
                         <textarea name="descripcion" class="form-control" rows="6"></textarea>
                     </div>
 
+                    <div class="col-12">
+                        <label class="form-label">Contenido adicional (HTML enriquecido)</label>
+                        <textarea name="contenido_html" class="form-control" rows="6" placeholder="Puedes insertar tablas, listas, contenido más detallado..."></textarea>
+                    </div>
+
                     {{-- Características estructuradas --}}
                     <div class="col-md-3">
                         <label class="form-label">Habitaciones</label>
