@@ -9,7 +9,7 @@
     </div>
 
     <div class="card shadow-sm">
-        <div class="card-body" style="max-height: 100vh; overflow-y: auto;">
+        <div class="card-body mb-4" style="max-height: 100vh; overflow-y: auto;">
 
             <form action="{{ route('admin.subzonas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -37,6 +37,16 @@
                     <div class="col-md-6">
                         <label class="form-label">Imagen destacada</label>
                         <input type="file" name="imagen_destacada" class="form-control" accept="image/*">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Plano (imagen)</label>
+                        <input type="file" name="plano" class="form-control" accept="image/*">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Pdf informativo</label>
+                        <input type="file" name="pdf_info_comercial" class="form-control" accept="pdf/*">
                     </div>
 
                     <div class="col-12">
@@ -90,7 +100,7 @@
                     </div>
                 </div>
 
-                <div class="text-end mt-4">
+                <div class="text-end my-4">
                     <button type="submit" class="btn btn-main">Guardar Subzona</button>
                 </div>
             </form>
