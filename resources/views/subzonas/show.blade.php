@@ -69,15 +69,14 @@
                 </div>
             </div>
         @endif
-        <h2 class="h5 mb-4">Detalles de la Promoción</h2>
         {{-- Contenido HTML extendido --}}
         @if($subzona->contenido_html)
+        <h2 class="h5 mb-4">Detalles de la Promoción</h2>
             <div class="mb-5">
                 {!! $subzona->contenido_html !!}
             </div>
         @endif
 
-        <h2 class="h5 mb-4">Galería de Imágenes</h2>
         {{-- Galería tipo mosaico --}}
         @if($subzona->imagenes && count($subzona->imagenes))
             <h2 class="h5 mb-4">Galería de imágenes</h2>
