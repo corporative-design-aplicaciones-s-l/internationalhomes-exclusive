@@ -27,7 +27,7 @@
             <div class="col-md-6">
                 <table class="table table-bordered">
                     <tbody>
-                        @if($subzona->superficie)<tr><th>Superficie</th><td>{{ $subzona->superficie }} m²</td></tr>@endif
+                        @if($subzona->superficie)<tr><th>Superficie</th><td>{{ number_format($subzona->superficie / 100, 2, ',') }} m²</td></tr>@endif
                         @if($subzona->habitaciones)<tr><th>Habitaciones</th><td>{{ $subzona->habitaciones }}</td></tr>@endif
                         @if($subzona->banos)<tr><th>Baños</th><td>{{ $subzona->banos }}</td></tr>@endif
                         @if($subzona->precio_desde)<tr><th>Desde</th><td>€{{ number_format($subzona->precio_desde, 0, ',', '.') }}</td></tr>@endif

@@ -53,10 +53,10 @@
                         <div class="card h-100 shadow-sm border-0">
                             @if ($subzona->imagen_destacada)
                                 <img src="{{ asset('storage/' . $subzona->imagen_destacada) }}" class="card-img-top"
-                                    alt="{{ $subzona->titulo }}" style="aspect-ratio: 4/3; object-fit: cover;">
+                                    alt="{{ $subzona->nombre }}" style="aspect-ratio: 4/3; object-fit: cover;">
                             @endif
                             <div class="card-body d-flex flex-column">
-                                <h5 class="card-title">{{ $subzona->titulo }}</h5>
+                                <h5 class="card-title">{{ $subzona->nombre }}</h5>
                                 <p class="card-text flex-grow-1">{{ Str::limit(strip_tags($subzona->descripcion), 100) }}
                                 </p>
                                 <a href="{{ route('subzonas.show', ['locale' => app()->getLocale(), 'slug' => $subzona->slug]) }}"

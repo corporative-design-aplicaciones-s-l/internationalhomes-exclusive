@@ -36,12 +36,32 @@
 
                     <div class="col-md-6">
                         <label class="form-label">Imagen destacada</label><br>
-                        @if($subzona->imagen_destacada)
-                            <img src="{{ asset('storage/' . $subzona->imagen_destacada) }}" class="img-fluid rounded shadow-sm mb-2" style="max-height: 200px;">
+                        @if ($subzona->imagen_destacada)
+                            <img src="{{ asset('storage/' . $subzona->imagen_destacada) }}"
+                                class="img-fluid rounded shadow-sm mb-2" style="max-height: 200px;">
                         @endif
                         <input type="file" name="imagen_destacada" class="form-control" accept="image/*">
                     </div>
 
+                    <div class="col-md-6">
+                        <label class="form-label">Plano (imagen)</label>
+                        <input type="file" name="plano" class="form-control" accept="image/*">
+                        @if ($subzona->plano)
+                            <img src="{{ asset('storage/' . $subzona->plano) }}" class="img-fluid mt-2"
+                                style="max-height: 150px;">
+                        @endif
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">PDF info comercial</label>
+                        <input type="file" name="pdf_info_comercial" class="form-control" accept="application/pdf">
+                        @if ($subzona->pdf_info_comercial)
+                            <a href="{{ asset('storage/' . $subzona->pdf_info_comercial) }}" target="_blank"
+                                class="d-block mt-2">
+                                Ver documento actual
+                            </a>
+                        @endif
+                    </div>
                     <div class="col-12">
                         <label class="form-label">Resumen corto</label>
                         <textarea name="resumen" class="form-control" rows="3" maxlength="300">{{ $subzona->resumen }}</textarea>
@@ -59,7 +79,8 @@
 
                     <div class="col-md-3">
                         <label class="form-label">Habitaciones</label>
-                        <input type="number" name="habitaciones" class="form-control" value="{{ $subzona->habitaciones }}">
+                        <input type="number" name="habitaciones" class="form-control"
+                            value="{{ $subzona->habitaciones }}">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Baños</label>
@@ -67,11 +88,13 @@
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Superficie total (m²)</label>
-                        <input type="number" step="0.01" name="superficie" class="form-control" value="{{ $subzona->superficie }}">
+                        <input type="number" step="0.01" name="superficie" class="form-control"
+                            value="{{ $subzona->superficie }}">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label">Precio desde (€)</label>
-                        <input type="number" name="precio_desde" class="form-control" value="{{ $subzona->precio_desde }}">
+                        <input type="number" name="precio_desde" class="form-control"
+                            value="{{ $subzona->precio_desde }}">
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Estado</label>
@@ -79,7 +102,8 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Fecha de entrega</label>
-                        <input type="text" name="fecha_entrega" class="form-control" value="{{ $subzona->fecha_entrega }}">
+                        <input type="text" name="fecha_entrega" class="form-control"
+                            value="{{ $subzona->fecha_entrega }}">
                     </div>
 
                     <div class="col-md-6">
@@ -89,24 +113,6 @@
                     <div class="col-md-6">
                         <label class="form-label">Ventajas</label>
                         <textarea name="ventajas" class="form-control">{{ $subzona->ventajas }}</textarea>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Plano (imagen)</label>
-                        <input type="file" name="plano" class="form-control" accept="image/*">
-                        @if($subzona->plano)
-                            <img src="{{ asset('storage/' . $subzona->plano) }}" class="img-fluid mt-2" style="max-height: 150px;">
-                        @endif
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">PDF info comercial</label>
-                        <input type="file" name="pdf_info_comercial" class="form-control" accept="application/pdf">
-                        @if($subzona->pdf_info_comercial)
-                            <a href="{{ asset('storage/' . $subzona->pdf_info_comercial) }}" target="_blank" class="d-block mt-2">
-                                Ver documento actual
-                            </a>
-                        @endif
                     </div>
 
                     {{-- Galería --}}
@@ -123,7 +129,8 @@
                             <div class="row mt-3">
                                 @foreach ($subzona->imagenes as $img)
                                     <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-2">
-                                        <img src="{{ asset('storage/' . $img->path) }}" class="img-fluid rounded shadow-sm">
+                                        <img src="{{ asset('storage/' . $img->path) }}"
+                                            class="img-fluid rounded shadow-sm">
                                     </div>
                                 @endforeach
                             </div>
@@ -148,37 +155,37 @@
 
     dropzone.addEventListener('click', () => fileInput.click());
     dropzone.addEventListener('dragover', e => {
-        e.preventDefault();
-        dropzone.classList.add('dragover');
+    e.preventDefault();
+    dropzone.classList.add('dragover');
     });
     dropzone.addEventListener('dragleave', () => dropzone.classList.remove('dragover'));
     dropzone.addEventListener('drop', e => {
-        e.preventDefault();
-        dropzone.classList.remove('dragover');
-        fileInput.files = e.dataTransfer.files;
-        showPreviews(e.dataTransfer.files);
+    e.preventDefault();
+    dropzone.classList.remove('dragover');
+    fileInput.files = e.dataTransfer.files;
+    showPreviews(e.dataTransfer.files);
     });
     fileInput.addEventListener('change', function () {
-        showPreviews(this.files);
+    showPreviews(this.files);
     });
 
     function showPreviews(files) {
-        previewContainer.innerHTML = '';
-        Array.from(files).forEach(file => {
-            if (!file.type.startsWith('image/')) return;
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const col = document.createElement('div');
-                col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 mb-2';
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.className = 'img-fluid rounded shadow-sm';
-                img.style.height = '100px';
-                img.style.objectFit = 'cover';
-                col.appendChild(img);
-                previewContainer.appendChild(col);
-            };
-            reader.readAsDataURL(file);
-        });
+    previewContainer.innerHTML = '';
+    Array.from(files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = function (e) {
+    const col = document.createElement('div');
+    col.className = 'col-6 col-sm-4 col-md-3 col-lg-2 mb-2';
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    img.className = 'img-fluid rounded shadow-sm';
+    img.style.height = '100px';
+    img.style.objectFit = 'cover';
+    col.appendChild(img);
+    previewContainer.appendChild(col);
+    };
+    reader.readAsDataURL(file);
+    });
     }
 @endsection
