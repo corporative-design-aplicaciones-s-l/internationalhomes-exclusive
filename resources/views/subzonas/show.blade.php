@@ -84,7 +84,7 @@
                 @foreach($subzona->imagenes as $imagen)
                     <div class="col-6 col-md-4 col-lg-3">
                         <a href="{{ asset('storage/' . $imagen->path) }}" class="glightbox" data-gallery="gallery">
-                            <img src="{{ asset('storage/' . $imagen->path) }}" class="img-fluid rounded shadow-sm" alt="Imagen">
+                            <img src="{{ asset('storage/' . $imagen->path) }}" style="aspect-ratio: 1/1; object-fit: cover;" class="img-fluid rounded shadow-sm" alt="Imagen">
                         </a>
                     </div>
                 @endforeach
