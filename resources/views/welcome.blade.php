@@ -248,7 +248,7 @@
                 <div class="hotspot" style="top: 48%; left: 69.5%;" data-name="New Hotel"
                     data-image="/images/map/newhotel.jpg" data-link="" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1000" data-aos-once="true">
-                    <span class="label" style="top: -3px; left: 65px;">Hotel</span>
+                    <span class="label" style="top: -3px; left: 45px;">Hotel</span>
                 </div>
 
                 <div class="hotspot" style="top: 62.5%; left: 45%;" data-name="Sales Office"
@@ -284,7 +284,7 @@
                 <div class="hotspot" style="top: 73%; left: 34.8%;" data-name="Bungalows Gaudí"
                     data-image="/images/map/bungagaudi.jpg" data-link="https://internationalhomes-exclusive.com/es/subzona/bungalows-gaudi" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1600" data-aos-once="true">
-                    <span class="label">Bungalows Gaudí</span>
+                    <span class="label" style="top: 30px;">Bungalows Gaudí</span>
                 </div>
 
                 <div class="hotspot" style="top: 69%; left: 34.8%;" data-name="Bungalows Premium"
