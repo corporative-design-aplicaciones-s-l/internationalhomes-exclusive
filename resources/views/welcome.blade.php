@@ -248,7 +248,7 @@
                 <div class="hotspot" style="top: 48%; left: 69.5%;" data-name="New Hotel"
                     data-image="/images/map/newhotel.jpg" data-link="" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1000" data-aos-once="true">
-                    <span class="label">Hotel</span>
+                    <span class="label" style="top: -3px; left: 65px;">Hotel</span>
                 </div>
 
                 <div class="hotspot" style="top: 62.5%; left: 45%;" data-name="Sales Office"
@@ -278,7 +278,7 @@
                 <div class="hotspot" style="top: 73%; left: 40.8%;" data-name="Villas Atenea"
                     data-image="/images/map/atenea.jpg" data-link="https://internationalhomes-exclusive.com/es/subzona/villas-atenea" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1500" data-aos-once="true">
-                    <span class="label">Villas Atenea</span>
+                    <span class="label" style="top: -3px; left: 65px;">Villas Atenea</span>
                 </div>
 
                 <div class="hotspot" style="top: 73%; left: 34.8%;" data-name="Bungalows Gaudí"
@@ -296,7 +296,7 @@
                 <div class="hotspot" style="top: 71%; left: 30.8%;" data-name="Apartments"
                     data-image="/images/map/apartments.jpg" data-link="https://internationalhomes-exclusive.com/es/subzona/apartamentos-azahar" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1800" data-aos-once="true">
-                    <span class="label">Apartamentos</span>
+                    <span class="label" style="top: -3px; left: -55px;">Apartamentos</span>
                 </div>
 
                 <div class="hotspot" style="top: 60.3%; left: 26.4%;" data-name="Nostrum Living Care"
