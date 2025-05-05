@@ -14,7 +14,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- CSS generado -->
+    <link rel="stylesheet" href="{{ asset('build/assets/app-1752ae9d.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-1486c388.css') }}">
+
+    <!-- JS generado -->
+    <script type="module" src="{{ asset('build/assets/app-34cdb22a.js') }}"></script>
     @yield('styles') <!-- Aquí cargamos los estilos específicos de cada vista -->
 
     <style>
@@ -150,7 +155,7 @@
                 <div class="nav flex-column" id="accordionNav">
                     <div class="accordion-item">
                         <!-- Acordeón para Contenido -->
-                        <button class="nav-link collapsed" type="button" data-bs-toggle="collapse"
+                        {{-- <button class="nav-link collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#contenidoCollapse" aria-expanded="false" aria-controls="contenidoCollapse">
                             Contenido
                         </button>
@@ -165,7 +170,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- Acordeón Propiedades -->
                     <div class="accordion-item">
                         <button class="nav-link collapsed" type="button" data-bs-toggle="collapse"
@@ -186,14 +191,14 @@
                                     <li class="nav-item"><a class="nav-link"
                                             href="{{ route('admin.subzonas.index') }}">Subzonas</a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li>
+                                    {{-- <li class="nav-item"><a class="nav-link" href="#">Contactos</a></li> --}}
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <!-- Acordeón para Admin -->
 
-                    <div class="accordion-item">
+                    {{-- <div class="accordion-item">
                         <button class="nav-link collapsed" type="button" data-bs-toggle="collapse"
                             data-bs-target="#adminCollapse" aria-expanded="false" aria-controls="adminCollapse">
                             Admin
@@ -209,12 +214,13 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <li class="nav-item">
                     <!-- Enlace de Logout -->
-                    <form action="{{ route('logout', ['locale' => app()->getLocale()]) }}" method="POST" id="logout-form" class="d-inline">
+                    <form action="{{ route('logout', ['locale' => app()->getLocale()]) }}" method="POST"
+                        id="logout-form" class="d-inline">
                         @csrf
                         <button type="submit" class="nav-link">
                             <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
