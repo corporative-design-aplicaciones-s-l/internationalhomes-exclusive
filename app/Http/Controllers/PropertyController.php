@@ -129,7 +129,7 @@ class PropertyController extends Controller
 
         $property = Property::with('images')->findOrFail($id);
 
-        return view('admin.properties.edit', compact('subzonas', 'propietarios'));
+        return view('admin.properties.edit', compact('subzonas', 'property'));
     }
 
     public function update(Request $request, $id)
