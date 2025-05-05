@@ -136,7 +136,7 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
 
-        dd($request. $id);
+        dd( $property);
 
         $request->validate([
             'title' => 'required|string|max:255',
