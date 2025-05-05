@@ -136,29 +136,29 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
 
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'location' => 'nullable|string',
-            'price' => 'nullable|numeric',
-            'tipo' => 'nullable|string|max:100',
-            'subzona_id' => 'nullable|exists:subzonas,id',
-            'description' => 'nullable|string',
-            'description_en' => 'nullable|string',
-            'description_fr' => 'nullable|string',
-            'description_de' => 'nullable|string',
-            'description_ru' => 'nullable|string',
-            'banos' => 'nullable|integer',
-            'habitaciones' => 'nullable|integer',
-            'metros' => 'nullable|integer',
-            'tiene_solar' => 'nullable|boolean',
-            'metros_solar' => 'nullable|integer',
-            'tiene_patio' => 'nullable|boolean',
-            'destacada' => 'nullable|boolean',
-            'tiene_piscina' => 'nullable|boolean',
-            'images.*' => 'nullable|image|max:5120',
-        ]);
+        // $request->validate([
+        //     'title' => 'required|string|max:255',
+        //     'location' => 'nullable|string',
+        //     'price' => 'nullable|numeric',
+        //     'tipo' => 'nullable|string|max:100',
+        //     'subzona_id' => 'nullable|exists:subzonas,id',
+        //     'description' => 'nullable|string',
+        //     'description_en' => 'nullable|string',
+        //     'description_fr' => 'nullable|string',
+        //     'description_de' => 'nullable|string',
+        //     'description_ru' => 'nullable|string',
+        //     'banos' => 'nullable|integer',
+        //     'habitaciones' => 'nullable|integer',
+        //     'metros' => 'nullable|integer',
+        //     'tiene_solar' => 'nullable|boolean',
+        //     'metros_solar' => 'nullable|integer',
+        //     'tiene_patio' => 'nullable|boolean',
+        //     'destacada' => 'nullable|boolean',
+        //     'tiene_piscina' => 'nullable|boolean',
+        //     'images.*' => 'nullable|image|max:5120',
+        // ]);
 
-        dd($request);
+        // dd($request);
 
         $property->update([
             'title' => $request->title,
