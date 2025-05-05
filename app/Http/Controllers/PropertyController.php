@@ -136,14 +136,12 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
 
-        dd( $request);
         $request->validate([
             'title' => 'required|string|max:255',
             'location' => 'nullable|string',
             'price' => 'nullable|numeric',
             'tipo' => 'nullable|string|max:100',
-            'subzona_id' => 'nullable|exists:zonas,id',
-            'propietario_id' => 'nullable|exists:propietarios,id',
+            'subzona_id' => 'nullable|exists:subzonas,id',
             'description' => 'nullable|string',
             'description_en' => 'nullable|string',
             'description_fr' => 'nullable|string',
