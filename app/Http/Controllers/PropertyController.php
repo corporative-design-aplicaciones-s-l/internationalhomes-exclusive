@@ -158,8 +158,6 @@ class PropertyController extends Controller
             'images.*' => 'nullable|image|max:5120',
         ]);
 
-
-
         $property->update([
             'title' => $request->title,
             'location' => $request->location,
@@ -196,6 +194,16 @@ class PropertyController extends Controller
                         'path' => $path,
                     ]);
                 }
+            }
+
+            if (!$property->slug) {
+                $baseSlug = Str::slug($request->title);
+                $slug = $baseSlug;
+                $count = 2;
+                while (Property::where('slug', $slug)->where('id', '!=', $property->id)->exists()) {
+                    $slug = $baseSlug . '-' . $count++;
+                }
+                $property->slug = $slug;
             }
 
             $property->save();
