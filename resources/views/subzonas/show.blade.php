@@ -71,7 +71,6 @@
         @endif
         {{-- Contenido HTML extendido --}}
         @if($subzona->contenido_html)
-        <h2 class="h5 mb-4">Detalles de la Promoción</h2>
             <div class="mb-5">
                 {!! $subzona->contenido_html !!}
             </div>
@@ -84,7 +83,7 @@
                 @foreach($subzona->imagenes as $imagen)
                     <div class="col-6 col-md-4 col-lg-3">
                         <a href="{{ asset('storage/' . $imagen->path) }}" class="glightbox" data-gallery="gallery">
-                            <img src="{{ asset('storage/' . $imagen->path) }}" class="img-fluid rounded shadow-sm" alt="Imagen">
+                            <img src="{{ asset('storage/' . $imagen->path) }}" class="img-fluid rounded shadow-sm" style="aspect-ratio: 1/1; object-fit: cover;" alt="Imagen">
                         </a>
                     </div>
                 @endforeach

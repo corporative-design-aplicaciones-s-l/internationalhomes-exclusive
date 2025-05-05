@@ -46,7 +46,7 @@
 
                     <div class="col-md-6">
                         <label class="form-label">Pdf informativo</label>
-                        <input type="file" name="pdf_info_comercial" class="form-control" accept="pdf/*">
+                        <input type="file" name="pdf_info_comercial" class="form-control" accept="application/pdf">
                     </div>
 
                     <div class="col-12">
