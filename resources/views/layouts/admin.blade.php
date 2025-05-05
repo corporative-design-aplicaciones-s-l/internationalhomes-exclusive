@@ -139,7 +139,7 @@
         <div class="sidebar">
             <h3 class="text-center">
                 <img src="{{ asset('images/logo/logo.svg') }}" alt="Domatia Logo" class="img-fluid mx-auto d-block"
-                    style="max-width: 200px;">
+                    style="width: 250px;">
             </h3>
             <ul class="nav flex-column">
                 <li class="nav-item">
