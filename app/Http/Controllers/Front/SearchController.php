@@ -13,11 +13,13 @@ class SearchController extends Controller
         $properties = Property::query();
 
         if ($request->filled('location')) {
-            $properties->where('location', 'like', '%' . $request->location . '%');
+            $properties->whereHas('subzona.zona', function ($q) use ($request) {
+                $q->where('nombre', 'like', '%' . $request->location . '%');
+            });
         }
 
         if ($request->filled('type')) {
-            $properties->where('type', $request->type); // Aún no hemos creado el campo 'type', se puede adaptar
+            $properties->where('tipo', $request->type); //
         }
 
         if ($request->filled('min_price')) {

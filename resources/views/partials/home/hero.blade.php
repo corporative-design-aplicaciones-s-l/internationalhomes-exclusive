@@ -13,9 +13,8 @@
                             <div class="col-md-3">
                                 <select name="type" class="form-select">
                                     <option value="">{{ __('home.location') }}</option>
-                                    <option value="piso">Residencial Oriol</option>
-                                    <option value="casa">Villas Atenea</option>
-                                    <option value="villa">Villa</option>
+                                    <option value="oriol">Residencial Oriol</option>
+                                    <option value="alhama">Alhama Nature</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
