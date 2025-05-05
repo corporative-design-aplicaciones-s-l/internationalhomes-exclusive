@@ -127,9 +127,9 @@ class PropertyController extends Controller
         $subzonas = Subzona::all();
         $propietarios = Propietario::all();
 
-        $property = Property::with('images')->findOrFail($id); // <- AÑADIDO with('images')
+        $property = Property::with('images')->findOrFail($id);
 
-        return view('admin.properties.create', compact('subzonas', 'propietarios'));
+        return view('admin.properties.edit', compact('subzonas', 'propietarios'));
     }
 
     public function update(Request $request, $id)

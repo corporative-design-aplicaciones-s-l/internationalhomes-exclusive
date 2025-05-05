@@ -37,7 +37,7 @@
 @section('content')
     <div class="card shadow-sm">
         <div class="card-header bg-dark text-white">
-            <h1 class="m-0 fs-4">Nueva Propiedad</h1>
+            <h1 class="m-0 fs-4">Editar Propiedad</h1>
         </div>
 
         <div class="card-body overflow-auto" style="max-height: 80vh;">
