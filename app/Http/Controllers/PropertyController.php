@@ -158,6 +158,8 @@ class PropertyController extends Controller
             'images.*' => 'nullable|image|max:5120',
         ]);
 
+        dd($request);
+
         $property->update([
             'title' => $request->title,
             'location' => $request->location,
