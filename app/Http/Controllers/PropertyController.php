@@ -136,8 +136,6 @@ class PropertyController extends Controller
     {
         $property = Property::findOrFail($id);
 
-        dd( $property);
-
         $request->validate([
             'title' => 'required|string|max:255',
             'location' => 'nullable|string',
@@ -184,6 +182,7 @@ class PropertyController extends Controller
             'tiene_piscina' => $request->has('tiene_piscina'),
         ]);
 
+        dd( $request);
         // Procesar nuevas imágenes si se suben
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
