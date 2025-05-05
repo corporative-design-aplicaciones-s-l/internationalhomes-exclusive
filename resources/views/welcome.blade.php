@@ -248,7 +248,7 @@
                 <div class="hotspot" style="top: 48%; left: 69.5%;" data-name="New Hotel"
                     data-image="/images/map/newhotel.jpg" data-link="" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1000" data-aos-once="true">
-                    <span class="label">Hotel</span>
+                    <span class="label" style="top: -3px; left: 45px;">Hotel</span>
                 </div>
 
                 <div class="hotspot" style="top: 62.5%; left: 45%;" data-name="Sales Office"
@@ -258,7 +258,7 @@
                 </div>
 
                 <div class="hotspot" style="top: 68%; left: 63%;" data-name="Oriol Villas"
-                    data-image="/images/map/oriol.jpg" data-link="" data-aos="fade-down" data-aos-duration="1000"
+                    data-image="/images/map/oriol.jpg" data-link="https://internationalhomes-exclusive.com/es/entorno/residencial-oriol" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1200" data-aos-once="true">
                     <span class="label">Oriol Villas</span>
                 </div>
@@ -276,27 +276,27 @@
                 </div>
 
                 <div class="hotspot" style="top: 73%; left: 40.8%;" data-name="Villas Atenea"
-                    data-image="/images/map/atenea.jpg" data-link="" data-aos="fade-down" data-aos-duration="1000"
+                    data-image="/images/map/atenea.jpg" data-link="https://internationalhomes-exclusive.com/es/subzona/villas-atenea" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1500" data-aos-once="true">
-                    <span class="label">Villas Atenea</span>
+                    <span class="label" style="top: -3px; left: 65px;">Villas Atenea</span>
                 </div>
 
                 <div class="hotspot" style="top: 73%; left: 34.8%;" data-name="Bungalows Gaudí"
-                    data-image="/images/map/bungagaudi.jpg" data-link="" data-aos="fade-down" data-aos-duration="1000"
+                    data-image="/images/map/bungagaudi.jpg" data-link="https://internationalhomes-exclusive.com/es/subzona/bungalows-gaudi" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1600" data-aos-once="true">
-                    <span class="label">Bungalows Gaudí</span>
+                    <span class="label" style="top: 30px;">Bungalows Gaudí</span>
                 </div>
 
                 <div class="hotspot" style="top: 69%; left: 34.8%;" data-name="Bungalows Premium"
-                    data-image="/images/map/bungapremium.jpg" data-link="" data-aos="fade-down"
+                    data-image="/images/map/bungapremium.jpg" data-link="https://internationalhomes-exclusive.com/es/subzona/bungalows-gaudi" data-aos="fade-down"
                     data-aos-duration="1000" data-aos-delay="1700" data-aos-once="true">
                     <span class="label">Bungalows Premium</span>
                 </div>
 
                 <div class="hotspot" style="top: 71%; left: 30.8%;" data-name="Apartments"
-                    data-image="/images/map/apartments.jpg" data-link="" data-aos="fade-down" data-aos-duration="1000"
+                    data-image="/images/map/apartments.jpg" data-link="https://internationalhomes-exclusive.com/es/subzona/apartamentos-azahar" data-aos="fade-down" data-aos-duration="1000"
                     data-aos-delay="1800" data-aos-once="true">
-                    <span class="label">Apartamentos</span>
+                    <span class="label" style="top: -3px; left: -55px;">Apartamentos</span>
                 </div>
 
                 <div class="hotspot" style="top: 60.3%; left: 26.4%;" data-name="Nostrum Living Care"

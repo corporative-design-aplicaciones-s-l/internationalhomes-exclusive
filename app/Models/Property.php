@@ -45,17 +45,17 @@ class Property extends Model
         return $this->hasOneThrough(
             \App\Models\Zona::class,
             \App\Models\Subzona::class,
-            'id',          // Foreign key on subzonas table
-            'id',          // Foreign key on zonas table
-            'subzona_id',  // Local key on properties table
-            'zona_id'      // Local key on subzonas table
+            'id',
+            'id',
+            'subzona_id',
+            'zona_id'
         );
     }
 
     public function getZonaAttribute()
-{
-    return $this->subzona?->zona;
-}
+    {
+        return $this->subzona?->zona;
+    }
 
     public function propietario()
     {
