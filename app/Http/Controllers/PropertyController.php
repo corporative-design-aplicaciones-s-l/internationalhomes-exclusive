@@ -153,19 +153,19 @@ class PropertyController extends Controller
             'tiene_solar' => 'nullable|boolean',
             'metros_solar' => 'nullable|integer',
             'tiene_patio' => 'nullable|boolean',
-            'tiene_piscina' => 'nullable|boolean',
             'destacada' => 'nullable|boolean',
+            'tiene_piscina' => 'nullable|boolean',
             'images.*' => 'nullable|image|max:5120',
         ]);
 
-        // Actualizar campos
+
+
         $property->update([
             'title' => $request->title,
             'location' => $request->location,
             'price' => $request->price,
             'tipo' => $request->tipo,
             'subzona_id' => $request->subzona_id,
-            'propietario_id' => $request->propietario_id,
             'description' => $request->description,
             'description_en' => $request->description_en,
             'description_fr' => $request->description_fr,
