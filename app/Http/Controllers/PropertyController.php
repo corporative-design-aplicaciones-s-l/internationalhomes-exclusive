@@ -159,6 +159,7 @@ class PropertyController extends Controller
             'images.*' => 'nullable|image|max:5120',
         ]);
 
+        dd( $request);
         // Actualizar campos
         $property->update([
             'title' => $request->title,
@@ -182,7 +183,6 @@ class PropertyController extends Controller
             'tiene_piscina' => $request->has('tiene_piscina'),
         ]);
 
-        dd( $request);
         // Procesar nuevas imágenes si se suben
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $index => $image) {
