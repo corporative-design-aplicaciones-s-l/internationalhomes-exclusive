@@ -10,7 +10,7 @@
             @forelse($results as $property)
                 <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow-sm">
-                        <img src="{{ asset("storage/{$property->thumbnail}") }}" alt="{{ $property->title }}" class="w-100 h-100" style="object-fit: cover; aspect-ratio: 4/3;>
+                        <img src="{{ asset("storage/{$property->thumbnail}") }}" alt="{{ $property->title }}" class="w-100 h-100" style="object-fit: cover; aspect-ratio: 4/3;">
                         <div class="card-body">
                             <h5 class="card-title">{{ $property->title }}</h5>
                             <p class="card-text">€{{ number_format($property->price, 0, ',', '.') }} ·
