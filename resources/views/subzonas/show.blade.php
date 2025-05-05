@@ -7,7 +7,8 @@
 @endsection
 
 @section('content')
-<section class="bg-dark text-white py-5" style="background-image: url('{{ asset('storage/' . $subzona->imagen_destacada) }}'); background-size: cover; background-position: center;">
+<section class="bg-dark text-white py-5" style="background-image:    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+ url('{{ asset("storage/{$subzona->imagen_destacada}") }}'); background-size: cover; background-position: center;">
     <div class="container py-5 text-shadow">
         <h1 class="display-5 fw-bold">{{ $subzona->nombre }}</h1>
         @if($subzona->resumen)
